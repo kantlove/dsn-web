@@ -1,0 +1,80 @@
+<! DOCTYPE html>
+	<html>
+		<head>
+			<h1> MY FIRST BUTTON </h1>
+			<style>
+				body {
+				    margin: 0;
+				    padding: 0;
+				}
+
+				.container {
+				    position: relative;
+				    width: 100%;
+				}
+
+				.right {
+				    position: absolute;
+				    right: 0px;
+				    width: 300px;
+				}
+				.center {
+					margin:0 auto;
+					width: 30%;
+				}
+				.q1 {
+					position: absolute;
+					left: 0%;
+					width:33%;
+				}
+				.q2{
+					position: absolute;
+					left: 33%;
+					width: 33%
+
+
+				}
+
+				.image1{
+					width: 100%;
+				}
+
+				#searchbar{position:relative; width:1040px; height:auto;}
+				.formulaire{display:inline-block;}
+				.formulaire .champ       {width:600px; height:35px;}
+				.formulaire .bouton       { background-image: url(images/searchbar_button.png);background-repeat: no-repeat;width: 35px;height: 35px;padding: 0; }
+
+			</style>
+		</head>
+		<body>
+			<button type="button"
+			onclick= "myFunction()">
+			Click me to 
+			</button>
+			<div id="searchbar">
+                <form action="" class="formulaire">
+               <input class="champ" type="text" value="Search...)"/>
+                    <input class="bouton" type="button" value=" " />
+                     
+                </form>
+                </div>
+			<div class="center">			
+				<button type="button"
+				onclick= "myFunction()">
+				Click me to 
+				</button>
+			</div>
+			<div class="q1">
+				<img class="image1" src="DSCN2006.JPG"></img>
+			</div>
+			<div class="q2">
+				<img class="image1" src="DSCN2006.JPG"></img>
+			</div>			
+			<p id="demo"></p>
+			<script>
+			function myFunction() {
+				document.getElementById('demo').innerHTML = "Hello";	
+				prompt('How are you ?');		}
+			</script>
+		</body>
+	</html>
