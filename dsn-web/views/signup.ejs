@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title> Please Sign up </title>
+		</head>
+		<body>
+			<form action="myFunction()">
+				User Name :<input id="user_name" name="username" placeholder="Choose a pseudo"/><br>
+				Full Name :<input name="fullname" placeholder="Full name"/><br>
+				Email :<input name="email" placeholder="Your email address"/><br>
+				Password : <input name="password" placeholder="Choose a password name"/><br>
+			<input type="button" Value="Submit" onclick="myFunction()"/>
+			
+			<script>
+				function myFunction(){
+					var inputUsername = document.getElementById('user_name');
+					post('/signupprocess', {
+						username: inputUsername.value
+					});
+				}
+
+				function post(path, params, method) {
+				    method = method || "post"; // Set method to post by default if not specified.
+
+				    // The rest of this code assumes you are not using a library.
+				    // It can be made less wordy if you use one.
+				    var form = document.createElement("form");
+				    form.setAttribute("method", method);
+				    form.setAttribute("action", path);
+
+				    for(var key in params) {
+				        if(params.hasOwnProperty(key)) {
+				            var hiddenField = document.createElement("input");
+				            hiddenField.setAttribute("type", "hidden");
+				            hiddenField.setAttribute("name", key);
+				            hiddenField.setAttribute("value", params[key]);
+
+				            form.appendChild(hiddenField);
+				         }
+				    }
+
+				    document.body.appendChild(form);
+				    form.submit();
+				}
+			</script>
+			</form>
+		</body>
+	</html>
