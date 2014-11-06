@@ -6,20 +6,21 @@
 		<body>
 			<form action="myFunction()">
 				User Name :<input id="user_name" name="username" placeholder="Write your pseudo"/><br>
-				Password : <input name="password" placeholder="write a password name"/><br>
+				Password : <input id="password" name="password" placeholder="write a password name"/><br>
 			<input type="button" Value="Submit" onclick="myFunction()"/>
 			
 			<script>
 				function myFunction(){
 					var inputUsername = document.getElementById('user_name');
-					post('/signupprocess', {
+					var inputPassword = document.getElementById('password');
+					post('/signinprocess', {
 						username: inputUsername.value, password: inputPassword.value
 					});
 					window.location='/mainpage'
 				}
 
-				function get(path, params, method) {
-				    method = method || "get"; // Set method to post by default if not specified.
+				function post(path, params, method) {
+				    method = method || "post"; // Set method to post by default if not specified.
 
 				    // The rest of this code assumes you are not using a library.
 				    // It can be made less wordy if you use one.
