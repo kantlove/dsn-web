@@ -38,8 +38,16 @@ module.exports.routes = {
 
   '/signupprocess' :'SignupController.processSignup',
 
+  '/signinprocess' :'SigninController.processSignup',
+
   '/signup' : {
     view: 'signup'
+  },
+  '/signin' : {
+    view: 'signin'
+  },
+  '/mainpage':{
+    view:'mainpage'
   }
 
   
