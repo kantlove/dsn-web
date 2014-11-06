@@ -6,20 +6,33 @@
 		<body>
 			<form action="myFunction()">
 				User Name :<input id="user_name" name="username" placeholder="Choose a pseudo"/><br>
-				Full Name :<input name="fullname" placeholder="Full name"/><br>
-				Email :<input name="email" placeholder="Your email address"/><br>
-				Password : <input name="password" placeholder="Choose a password name"/><br>
+				Full Name :<input id="fullname" placeholder="Full name"/><br>
+				Email :<input id="email" placeholder="Your email address"/><br>
+				Password : <input id="password" placeholder="Choose a password name"/><br>
 			<input type="button" Value="Submit" onclick="myFunction()"/>
 			
 			<script>
+				var http = require('http');
 				function myFunction(){
 					var inputUsername = document.getElementById('user_name');
+					var inputFullname = document.getElementById('fullname');
+					var inputEmail = document.getElementById('email');
+					var inputPassword = document.getElementById('password');
+					
 					post('/signupprocess', {
-						username: inputUsername.value
+						username: inputUsername.value,
+						fullname: inputFullname.value,
+						email: inputEmail.value,
+						password: inputPassword.value
 					});
+<<<<<<< HEAD
 					window.location='/mainpage'
 				}
+=======
+>>>>>>> abe914d65e35a75b44fe0a466f9cb4a90c7948ce
 
+				}
+				
 				function post(path, params, method) {
 				    method = method || "post"; // Set method to post by default if not specified.
 
@@ -43,6 +56,7 @@
 				    document.body.appendChild(form);
 				    form.submit();
 				}
+				
 			</script>
 			</form>
 		</body>
