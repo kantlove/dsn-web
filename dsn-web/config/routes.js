@@ -36,9 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/signupprocess' :'SignupController.processSignup',
 
-  '/signinprocess' :'SigninController.processSignup',
+  '/signinprocess' :'SigninController.processSignin',
 
   '/signup' : {
     view: 'signup'
