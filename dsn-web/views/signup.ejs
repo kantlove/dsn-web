@@ -12,7 +12,6 @@
 			<input type="button" Value="Submit" onclick="myFunction()"/>
 			
 			<script>
-				var http = require('http');
 				function myFunction(){
 					var inputUsername = document.getElementById('user_name');
 					var inputFullname = document.getElementById('fullname');
@@ -25,12 +24,6 @@
 						email: inputEmail.value,
 						password: inputPassword.value
 					});
-<<<<<<< HEAD
-					window.location='/mainpage'
-				}
-=======
->>>>>>> abe914d65e35a75b44fe0a466f9cb4a90c7948ce
-
 				}
 				
 				function post(path, params, method) {
