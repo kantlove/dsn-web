@@ -2,21 +2,43 @@
 	<html>
 		<head>
 			<title> Please Sign up </title>
+			<script src="http://code.jquery.com/jquery-1.11.1.js"/>
+			<script src="http://code.jquery.com/jquery-2.1.1.js"/>
+			<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 		</head>
 		<body>
 			<form action="myFunction()">
 				User Name :<input id="user_name" name="username" placeholder="Write your pseudo"/><br>
 				Password : <input id="password" name="password" placeholder="write a password name"/><br>
 			<input type="button" Value="Submit" onclick="myFunction()"/>
-			
 			<script>
 				function myFunction(){
+					console.log("requesting...");
 					var inputUsername = document.getElementById('user_name');
 					var inputPassword = document.getElementById('password');
-					post('/signinprocess', {
-						username: inputUsername.value, password: inputPassword.value
+					
+					$.ajax({
+						type: "POST",
+						url: "http://dreamyday.tk:80/session/signin",
+						data: {username: inputUsername.value, password: inputPassword.value},
+						success: function(data, textStatus, jqXHR){
+							console.log(data);
+							console.log(textStatus);
+
+							if (data.result == "success") {
+								window.location = '/mainpage';
+							}
+						},
+						error: function(xhRequest, ErrorText, thrownError) {
+							console.log(xhRequest);
+							console.log(ErrorText);
+							console.log(thrownError);
+						}
+					})
+					.done(function(msg){
+						console.log("requested");
 					});
-					window.location='/mainpage'
+				
 				}
 
 				function post(path, params, method) {

@@ -8,12 +8,14 @@ module.exports = {
 
       	username: req.body.username,
     	password: req.body.password
-    })
+    	    })
     .then(function(response){
-    	response.getBody();
+    	
     	console.log(response.body);
+
     	return res.send(response.body);
 
     });
+    callback(reponses.code);
   }
 };
