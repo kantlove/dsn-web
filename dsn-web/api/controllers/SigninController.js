@@ -16,6 +16,8 @@ module.exports = {
     	return res.send(response.body);
 
     });
-    callback(reponses.code);
+
   }
 };
+
+

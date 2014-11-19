@@ -1,24 +1,25 @@
 module.exports = {
 
 	attributes: {
-		id: {
-			type: 'int'
-		},
 
 		username: {
-			type: 'string'
-		},
-
-		email: {
 			type: 'string'
 		},
 
 		password: {
 			type: 'string'
 		},
+	},
+	beforeCreate: function(attrs,next){
+		var bcrypt = require('bcrypt');
+		bcrypt.genSalt(10, function(err,salt){
+			if (err) return next(err);
 
-		fullname: {
-			type: 'string'
-		}
+			bcrypt.hash(attrs.password,salt,function(err,hash){
+				if (err) return next(err);
+				attrs.password=hash;
+				next();
+			});
+		});
 	}
-}
+};
