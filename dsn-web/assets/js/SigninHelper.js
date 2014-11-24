@@ -1,14 +1,14 @@
-function signup(username, password, fullname, email, callbackSuccess, callbackError){
+function signin(username, password,callbackSuccess,callbackError){
 	console.log("requesting...");
+	var inputUsername = document.getElementById('user_name');
+	var inputPassword = document.getElementById('password');
 	
 	$.ajax({
 		type: "POST",
-		url: "http://dreamyday.tk:80/user/",
+		url: "http://dreamyday.tk:80/session/signin",
 		data: {
 			username: username, 
-			password: password,
-			fullname: fullname,
-			email: email
+			password: password
 		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function

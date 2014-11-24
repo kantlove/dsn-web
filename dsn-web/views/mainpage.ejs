@@ -2,14 +2,53 @@
 <html>
     <head>
         <title>mainpage</title>
+            <script src="http://code.jquery.com/jquery-1.11.1.js"/>
+            <script src="http://code.jquery.com/jquery-2.1.1.js"/>
+            <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+            <script src="UserHelper.js"></script>
     </head>
     <body>
         <title>The Main page is under construction</title>
-        <script >
-        console.log('re'+localStorage.getItem("sessionUserName"));
+        <button type="button" onclick="myfunction()">  log out </button>
+        <script>
+            function myfunction(){
+                window.location='/homepage';
+            }
         </script>
-        <button type="button" onclick="myfunction()">
-        log out
-        </button>
+        <button type="button" onclick="myfunction1()"> Get information on the user </button>
+        <script>
+            var tu=10;
+            function onSuccess(data, textStatus, jqXHR){
+                console.log(data);
+                var userID = data.user_id;
+                var sessionID=localStorage.getItem("sessionID");  
+                
+                if (data.result == "success") {
+                    getUserInfo(sessionID,userID,
+                    function success(data, textStatus, jqXHR) {
+                        console.log(data);
+
+                    },
+                    function error(xhRequest, ErrorText, thrownError) {
+
+                    }
+                );
+                }            
+                
+
+            }
+            function onFail(xhRequest, ErrorText, thrownError){
+
+            }
+            function myfunction1(){
+                var sessionID=localStorage.getItem("sessionID");
+                //var username=localStorage.getItem("username");
+                getSessionInfo(sessionID,onSuccess,onFail);
+
+            }
+        </script>
+        <script >
+        console.log('tu vaut'+tu);
+        </script>
     </body>
 </html>
