@@ -6,6 +6,7 @@
             <script src="http://code.jquery.com/jquery-2.1.1.js"/>
             <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
             <script src="UserHelper.js"></script>
+            <script src="DreamHelper.js"></script>
     </head>
     <body>
         <title>The Main page is under construction</title>
@@ -17,7 +18,6 @@
         </script>
         <button type="button" onclick="myfunction1()"> Get information on the user </button>
         <script>
-            var tu=10;
             function onSuccess(data, textStatus, jqXHR){
                 console.log(data);
                 var userID = data.user_id;
@@ -47,8 +47,21 @@
 
             }
         </script>
-        <script >
-        console.log('tu vaut'+tu);
+        <br> <br/>
+        <button type="button" onclick="postdream">  Post a dream </button>
+        <input type="text" name="Your dream" id="dream"></input><br/><br>
+        <script>
+            function callbackSuccesspost(data, textStatus, jqXHR){
+                if (data.result == "success"){
+                    console.log('dream posted'); 
+                }
+
+            }
+            function postdream(){
+                var te = $("#dream").val(); 
+                postDream(sessionID, te, callbackSuccesspost, callbackErrorpost);
+            }
+            
         </script>
     </body>
 </html>
