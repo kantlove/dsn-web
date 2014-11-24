@@ -26,6 +26,7 @@ function getSessionInfo(sessionID,callbackSuccess,callbackError) {
 		type: "GET",
 		url: "http://dreamyday.tk:80/session?sessionId="+sessionID,
 		success: function (data,textStatus,jqXHR){
+			// Check if callbackSuccess is a function
 			if (typeof(callbackSuccess) == "function") {
 				callbackSuccess(data, textStatus, jqXHR);
 			}
@@ -38,6 +39,28 @@ function getSessionInfo(sessionID,callbackSuccess,callbackError) {
 		}
 	})
 	.done(function(msg){
+		console.log("requested");
+	});
+}
+
+function getUserDreams(sessionID, userId, offSet, limit, callbackSuccess, callbackError) {
+	$.ajax({
+		type: "GET",
+		url: "http://dreamyday.tk:80/user/dreams?sessionId=" + sessionID + "&userId=" + userId + "&offset=" + offSet + "&limit=" + limit,
+		success: function(data, textStatus, jqXHR) {
+			// Check if callbackSuccess is a function
+			if (typeof(callbackSuccess) == "function") {
+				callbackSuccess(data, textStatus, jqXHR);
+			}
+		},
+		error: function(xhRequest, ErrorText, thrownError) {
+			// Check if callbackError is a function
+			if (typeof(callbackError) == "function") {
+				callbackError(xhRequest, ErrorText, thrownError);
+			}
+		}
+	})
+	.done(function(msg) {
 		console.log("requested");
 	});
 }
