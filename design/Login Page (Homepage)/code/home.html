@@ -22,6 +22,16 @@ $(document).ready(function(e) {
         $(this).css({'border-color': 'black'});
     })
 
+    $('a.menuBtn').click(function() {
+        console.log($(this).index());
+        if($(this).index() == 0) {
+            $('p#botText').html("You're falling, falling, falling... and then you wake up. This is a very common dream and is said to symbolize insecurities and anxiety. Something in your life is essentially out of control and there is nothing you can do to stop it. Another interpretation is that you have a sense of failure about something. Maybe you're not doing well in school or at work and are afraid you're going to be fired or expelled. Again, you feel that you can't control the situation.  <i>~ by <a class=\"author\">Thai Minh</a></i>");
+        }
+        else {
+            $('p#botText').html("DSN is Dream Social Network.");
+        }
+    });
+
     function arrangeElmts() {
         var textDiv = $('div#textDiv'), formDiv = $('div#formDiv'),
             topBar = $('div#topBar'), bgDiv = $('div#bgDiv'),
@@ -38,6 +48,8 @@ $(document).ready(function(e) {
         botText.css({'left': textDiv.position().left});
 
         botDiv.css({'top': topBar.height() + bgDiv.height()});
+
+        $('#botDiv>p').width(formDiv.position().left - 50)
 
         console.log(topBar.height(), bgDiv.height(), botDiv.position().top);
     }
@@ -95,7 +107,8 @@ $(document).ready(function(e) {
         </div>
         <div id="textDiv"><h1>Welcome to Dreamy Day</h1></div>
         <div id="botDiv">
-            <p id="botText">Dreaming cost none.</p>
+            <a class="menuBtn">Dream of the Day</a><a class="menuBtn">About Us</a>
+            <p id="botText">You're falling, falling, falling... and then you wake up. This is a very common dream and is said to symbolize insecurities and anxiety. Something in your life is essentially out of control and there is nothing you can do to stop it. Another interpretation is that you have a sense of failure about something. Maybe you're not doing well in school or at work and are afraid you're going to be fired or expelled. Again, you feel that you can't control the situation.  <i>~ by <a class="author">Thai Minh</a></i></p>
         </div>
     </body>
 </html>
