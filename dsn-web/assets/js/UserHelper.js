@@ -41,3 +41,25 @@ function getSessionInfo(sessionID,callbackSuccess,callbackError) {
 		console.log("requested");
 	});
 }
+
+function getUserDream(sessionID,userID,callbackSuccess,callbackError){
+
+	$.ajax({
+		type: "GET",
+		url: "http://dreamyday.tk:80/user/dreams?sessionId="+sessionID+"&userId="+userID,
+		success: function (data,textStatus,jqXHR){
+			if (typeof(callbackSuccess) == "function") {
+				callbackSuccess(data, textStatus, jqXHR);
+			}
+		},
+		error: function(xhRequest, ErrorText, thrownError) {
+			// Check if callbackError is a function
+			if (typeof(callbackError) == "function") {
+				callbackError(xhRequest, ErrorText, thrownError);
+			}
+		}		
+	})
+	.done(function(msg){
+		console.log("requested");
+	});
+}

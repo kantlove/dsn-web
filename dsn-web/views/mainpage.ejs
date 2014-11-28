@@ -4,9 +4,9 @@
         <title>mainpage</title>
             <script src="http://code.jquery.com/jquery-1.11.1.js"/>
             <script src="http://code.jquery.com/jquery-2.1.1.js"/>
-            <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-            <script src="UserHelper.js"></script>
-            <script src="DreamHelper.js"></script>
+            <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"/>
+            <script src="UserHelper.js"/>
+            <script src="DreamHelper.js"/>
     </head>
     <body>
         <title>The Main page is under construction</title>
@@ -21,12 +21,15 @@
             function onSuccess(data, textStatus, jqXHR){
                 console.log(data);
                 var userID = data.user_id;
+                localStorage.setItem("userId",data.user_id);
                 var sessionID=localStorage.getItem("sessionID");  
+                console.log('Before'+userID+sessionID);
                 
                 if (data.result == "success") {
                     getUserInfo(sessionID,userID,
                     function success(data, textStatus, jqXHR) {
                         console.log(data);
+                        write(data);
 
                     },
                     function error(xhRequest, ErrorText, thrownError) {
@@ -42,26 +45,50 @@
             }
             function myfunction1(){
                 var sessionID=localStorage.getItem("sessionID");
-                //var username=localStorage.getItem("username");
                 getSessionInfo(sessionID,onSuccess,onFail);
 
             }
         </script>
         <br> <br/>
-        <button type="button" onclick="postdream">  Post a dream </button>
+        <button type="button" onclick="postdream()">  Post a dream </button>
         <input type="text" name="Your dream" id="dream"></input><br/><br>
         <script>
-            function callbackSuccesspost(data, textStatus, jqXHR){
+            function callbackSuccesspostDream(data, textStatus, jqXHR){
                 if (data.result == "success"){
                     console.log('dream posted'); 
+                    localStorage.setItem("dreamId",data.dream_id);
                 }
-
             }
+            function callbackErrorpostDream(xhRequest, ErrorText, thrownError){
+                console.log('echec');
+                console.log(ErrorText);
+            }
+
             function postdream(){
-                var te = $("#dream").val(); 
-                postDream(sessionID, te, callbackSuccesspost, callbackErrorpost);
+                var text = $("#dream").val(); 
+                var sessionID=localStorage.getItem("sessionID");  
+                postDream(sessionID, text, callbackSuccesspostDream, callbackErrorpostDream);
             }
             
         </script>
+        <br></b>
+        <button type="button" onclick="getdream()"> get dream</button><br></br>
+        <script>
+        var sessionID=localStorage.getItem("sessionID");
+        var userID=localStorage.getItem("userId");
+            function getdream(){
+                console.log('After '+ sessionID+ userID);
+                getUserDream(sessionID,userID ,
+                    function success(data,textStatus,jqXHR){
+                        console.log(data);
+                        var te=data.text;
+                },
+                    function error(xhRequest, ErrorText, thrownError){
+                        console.log('Can not get the dream');
+                    }
+                );  
+            }
+            write(te);
+            </script>
     </body>
 </html>

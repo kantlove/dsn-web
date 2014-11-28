@@ -2,6 +2,11 @@ function postDream(sessionID, text, callbackSuccess, callbackError) {
 		$.ajax({
 		type: "POST",
 		url: "http://dreamyday.tk:80/dream",
+		data: {
+			session_id: sessionID,
+			text: text
+
+		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
 			if (typeof(callbackSuccess) == "function") {
