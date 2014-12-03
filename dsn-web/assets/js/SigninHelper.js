@@ -1,8 +1,4 @@
 function signin(username, password,callbackSuccess,callbackError){
-	console.log("requesting...");
-	var inputUsername = document.getElementById('user_name');
-	var inputPassword = document.getElementById('password');
-	
 	$.ajax({
 		type: "POST",
 		url: "http://dreamyday.tk:80/session/signin",

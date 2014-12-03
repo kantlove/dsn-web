@@ -46,7 +46,7 @@ module.exports.routes = {
   },
   '/mainpage':{
     view:'mainpage'
-
+  },
   '/newsfeed': {
     view: 'newsfeed'
   }
