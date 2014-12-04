@@ -1,17 +1,18 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Home page</title>
-        <script src="http://code.jquery.com/jquery-2.1.1.js" />
-        <script src="jquery.easing.1.3.js"/>
-        <script src="SigninHelper.js"/>
-        <script src="SignupHelper.js"/>
+        <script src="/js/jquery-2.1.1.js"/>
+        <script src="/js/jquery.easing.js"/>
+        <script src="/js/SigninHelper.js"/>
+        <script src="/js/SignupHelper.js"/>
         <link rel="stylesheet" type="text/css" href="styles.css"/>
-        <script>
-        $ = jQuery.noConflict();
-        $(document).ready(function(e) {
+        <script type="text/javascript">
+         $ = jQuery.noConflict();
+            $(document).ready(function(e) {
             var pageWidth = $(document).width(), pageHeight = $(document).height();
             console.log('pageW: ' + pageWidth, 'pageH: ' + pageHeight);
+
+            
 
             /* arrange elements */
             arrangeElmts();
@@ -81,41 +82,37 @@
         <div id="bgDiv"></div>
         <div id="formDiv">
             <div id="signinDiv">
-                <form id="formSignin" method="post">
+                <form id="formSignin" method="post" name="signInSection">
                     <div>
-                        <input id="username" class="userInfo" type="text" placeholder="Username"/>
+                        <input id="username" class="userInfo" type="text" placeholder="Username" value="" name="usernamebox"/>
                     </div>
                     <div>
-                        <input id="password" class="userInfo" type="password" placeholder="Password"/>
+                        <input id="password" class="userInfo" type="password" placeholder="Password" name="passwordbox"/>
                     </div>
                     <div>
                         <input id="remember" type="checkbox"/> Remember me
                     </div>
                     <div id="buttonDiv">
-                        <button id="signinBtn" onclick="signinbutton()">Sign in
-                        </button></div>
-                        <script>
-                        console.log('premier');
-                        function signinbutton(){
-                            console.log('yo');
-                            var username = document.getElementById('username');
-                            var password = document.getElementById('password');
-                            signin(username,password,
-                                function sucessSignin(data, textStatus, jqXHR){
-                                    //window.location='/mainpage';
-                                    //localStorage.setItem("username",ju);
-                                    console.log(data);
-                                    console.log(success);
-                                },
-                                function errorSignin(xhRequest, ErrorText, thrownError){
-                                    alert('Wrong password or username. Please try again');
-                                    console.log('error');
+                        <button id="signinBtn" type="button" onclick="signInButton()">Sign in
+                        </button>
+                    </div>
+                </form>  
+            <script>
+            console.log('remind'+localStorage.getItem("remindMe"));
+            if (localStorage.getItem("remindMe")==1){
+                console.log(localStorage.getItem("username"));
+                if (localStorage.getItem("username")!=undefined){
+                    console.log('uu'+localStorage.getItem("username"));
+                    document.signInSection.usernamebox.value=localStorage.getItem("username");
+                }
+                if (localStorage.getItem("password")!=undefined){
+                    console.log('pp'+localStorage.getItem("password"));
+                    document.signInSection.passwordbox.value=localStorage.getItem("password");
+                }
 
-                                }
-                            );
-                        }
-                        </script>
-                </form>    
+
+            }
+            </script>  
             </div>
             <div id="signupDiv">
                 <p>New dreamer? Sign up here</p>
@@ -132,24 +129,7 @@
                     <div>
                         <input id="password_reg" class="userInfo" type="password" placeholder="Password"/>
                     </div>
-                    <div id="buttonDiv_reg"><button id="signupBtn" type="submit" onclick="signupbutton()">Register</button></div>
-                        <script>
-                        function signupbutton(){
-                            var email = document.getElementById('email');
-                            var username_reg = document.getElementById('username_reg');
-                            var fullname_reg = document.getElementById('fullname_reg');
-                            var password_reg = document.getElementById('password_reg');
-                            signup(username_reg,password_reg,fullname_reg,email,
-                                function successSignup(){
-
-                                },
-                                function errorSignup(){
-
-                                }
-                            );
-                        }
-
-                        </script>
+                    <div id="buttonDiv_reg"><button id="signupBtn" type="button" onclick="signUpButton()">Register</button></div>
                 </form>
             </div>
         </div>
@@ -158,6 +138,55 @@
             <a class="menuBtn">Dream of the Day</a><a class="menuBtn">About Us</a>
             <p id="botText">You're falling, falling, falling... and then you wake up. This is a very common dream and is said to symbolize insecurities and anxiety. Something in your life is essentially out of control and there is nothing you can do to stop it. Another interpretation is that you have a sense of failure about something. Maybe you're not doing well in school or at work and are afraid you're going to be fired or expelled. Again, you feel that you can't control the situation.  <i>~ by <a class="author">Thai Minh</a></i></p>
         </div>
+        <script>
+            function signInButton(){
+                var username = $('#username');
+                var password = $('#password');
+                signin(username.val(),password.val(),
+                    function sucessSignin(data, textStatus, jqXHR){
+                                    localStorage.setItem("sessionID",data.session_id);
+                                    localStorage.setItem("username",username.val());
+                                    localStorage.setItem("password",password.val());
+                                    console.log(data);
+                                    if (document.getElementById("remember").checked==true){
+                                        localStorage.setItem("remindMe",1);
+                                    }
+                                    else {
+                                        localStorage.setItem("remindMe",0);
+                                    }
+                                    window.location='/mainpage';
+                    },
+                    function errorSignin(xhRequest, ErrorText, thrownError){
+                                    alert('Wrong password or username. Please try again');
+                                    console.log('error');
+
+                    }
+                );
+            }
+            function signUpButton(){
+                var email = $('#email');
+                var username_reg = $('#username_reg');
+                var fullname_reg = $('#fullname_reg');
+                var password_reg = $('#password_reg');
+                signup(username_reg.val(),password_reg.val(),fullname_reg.val(),email.val(),
+                    function successSignup(data, textStatus, jqXHR){
+                        alert('Welcome on Dreamy Day');
+                        localStorage.setItem("sessionID",data.session_id);
+                        localStorage.setItem("username",username_reg.val());
+                        localStorage.setItem("password",password_reg.val());
+                        window.location='/mainpage';
+
+                    },
+                    function errorSignup(xhRequest, ErrorText, thrownError){
+                        alert('try an other username');
+                    }
+                );
+            }
+            function remindMe(){
+                localStorage.setItem("remindMe",'yes');
+                console.log(localStorage.getItem("remindMe")+'avant');
+            }
+        </script>
     </body>
 </html>
  No newline at end of file
