@@ -3,11 +3,37 @@
         <title>Home page</title>
         <script src="/js/jquery-2.1.1.js"/>
         <script src="/js/jquery.easing.js"/>
-        <script src="/js/SigninHelper.js"/>
-        <script src="/js/SignupHelper.js"/>
+        <script src="SigninHelper.js"/>
+        <script src="SignupHelper.js"/>
         <link rel="stylesheet" type="text/css" href="styles.css"/>
-        <script type="text/javascript">
-         $ = jQuery.noConflict();
+
+    </head>
+    <body>
+        <script>
+        console.log('qqqq');
+         
+        </script>
+        <div id="topBar"><p>Dreamy Day</p></div>
+        <div id="bgDiv"></div>
+        <div id="formDiv">
+            <div id="signinDiv">
+                <form id="formSignin" method="post" name="signInSection">
+                    <div>
+                        <input id="username" class="userInfo" type="text" placeholder="Username" value="" name="usernamebox"/>
+                    </div>
+                    <div>
+                        <input id="password" class="userInfo" type="password" placeholder="Password" name="passwordbox"/>
+                    </div>
+                    <div>
+                        <input id="remember" type="checkbox"/> Remember me
+                    </div>
+                    <div id="buttonDiv">
+                        <button id="signinBtn" type="button" onclick="signInButton()">Sign in
+                        </button>
+                    </div>
+                </form>  
+            <script>
+            $ = jQuery.noConflict();
             $(document).ready(function(e) {
             var pageWidth = $(document).width(), pageHeight = $(document).height();
             console.log('pageW: ' + pageWidth, 'pageH: ' + pageHeight);
@@ -63,7 +89,7 @@
             /* infinitely changing background image */
             var bgDiv = $('div#bgDiv');
             var interval = 10000;
-            var images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg']; // add more image here
+            var images = ['/images/bg1.jpg', '/images/bg2.jpg', '/images/bg3.jpg', '/images/bg4.jpg', '/images/bg5.jpg', '/images/bg6.jpg']; // add more image here
             setTimeout(changeBg, interval, 1);
             function changeBg(imgId) {
                 if(imgId >= images.length)
@@ -75,29 +101,6 @@
                 });
             }
         });
-        </script>
-    </head>
-    <body>
-        <div id="topBar"><p>Dreamy Day</p></div>
-        <div id="bgDiv"></div>
-        <div id="formDiv">
-            <div id="signinDiv">
-                <form id="formSignin" method="post" name="signInSection">
-                    <div>
-                        <input id="username" class="userInfo" type="text" placeholder="Username" value="" name="usernamebox"/>
-                    </div>
-                    <div>
-                        <input id="password" class="userInfo" type="password" placeholder="Password" name="passwordbox"/>
-                    </div>
-                    <div>
-                        <input id="remember" type="checkbox"/> Remember me
-                    </div>
-                    <div id="buttonDiv">
-                        <button id="signinBtn" type="button" onclick="signInButton()">Sign in
-                        </button>
-                    </div>
-                </form>  
-            <script>
             console.log('remind'+localStorage.getItem("remindMe"));
             if (localStorage.getItem("remindMe")==1){
                 console.log(localStorage.getItem("username"));
