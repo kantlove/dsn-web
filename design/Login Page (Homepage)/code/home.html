@@ -20,54 +20,42 @@ $(document).ready(function(e) {
     $('input.userInfo').mouseup(function() {
         $('input.userInfo').css({'borderColor': 'lightGray'});
         $(this).css({'border-color': 'black'});
-    })
-
-    $('a.menuBtn').click(function() {
-        console.log($(this).index());
-        if($(this).index() == 0) {
-            $('p#botText').html("You're falling, falling, falling... and then you wake up. This is a very common dream and is said to symbolize insecurities and anxiety. Something in your life is essentially out of control and there is nothing you can do to stop it. Another interpretation is that you have a sense of failure about something. Maybe you're not doing well in school or at work and are afraid you're going to be fired or expelled. Again, you feel that you can't control the situation.  <i>~ by <a class=\"author\">Thai Minh</a></i>");
-        }
-        else {
-            $('p#botText').html("DSN is Dream Social Network.");
-        }
     });
 
     function arrangeElmts() {
         var textDiv = $('div#textDiv'), formDiv = $('div#formDiv'),
             topBar = $('div#topBar'), bgDiv = $('div#bgDiv'),
-            botDiv = $('div#botDiv'), botText = $('p#botText');
+            dreamDiv = $('div#dreamDiv');
 
         var pageWidth = $(document).width(), pageHeight = $(document).height();
 
-        formDiv.css({'left': pageWidth / 5 * 3});
+        formDiv.css({'left': pageWidth / 4 * 2.5});
 
         textDiv
         .width(formDiv.position().left - 20)
-        .css({'top': topBar.height() + bgDiv.height()  - textDiv.height()});
+        .css({'top': formDiv.position().top - 40});
 
-        botText.css({'left': textDiv.position().left});
+        dreamDiv
+        .width(formDiv.position().left - 50)
+        .css({'top': textDiv.position().top +  textDiv.height()});
 
-        botDiv.css({'top': topBar.height() + bgDiv.height()});
-
-        $('#botDiv>p').width(formDiv.position().left - 50)
-
-        console.log(topBar.height(), bgDiv.height(), botDiv.position().top);
+        console.log(topBar.height(), bgDiv.height());
     }
 
     /* infinitely changing background image */
     var bgDiv = $('div#bgDiv');
-    var interval = 10000;
-    var images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg']; // add more image here
-    setTimeout(changeBg, interval, 1);
-    function changeBg(imgId) {
-        if(imgId >= images.length)
-            imgId = 0;
-        bgDiv.fadeOut(300, function() {
-            bgDiv.css('background-image', 'url("' + images[imgId] + '")');
-            bgDiv.fadeIn(300);
-            setTimeout(changeBg, interval, ++imgId);
-        });
-    }
+    //    var interval = 10000;
+    //    var images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg']; // add more image here
+    //    setTimeout(changeBg, interval, 1);
+    //    function changeBg(imgId) {
+    //        if(imgId >= images.length)
+    //            imgId = 0;
+    //        bgDiv.fadeOut(300, function() {
+    //            bgDiv.css('background-image', 'url("' + images[imgId] + '")');
+    //            bgDiv.fadeIn(300);
+    //            setTimeout(changeBg, interval, ++imgId);
+    //        });
+    //    }
 });
         </script>
     </head>
@@ -105,9 +93,8 @@ $(document).ready(function(e) {
                 </form>
             </div>
         </div>
-        <div id="textDiv"><h1>Welcome to Dreamy Day</h1></div>
-        <div id="botDiv">
-            <p id="botText">Dreaming cost none.</p>
-        </div>
+        <div id="textDiv"><h1>Welcome to <b>Dreamy Day</b></h1></div>
+        <div id="dreamDiv">My dream is to be happy with what I’m doing. I don’t know what I want to do, I just want to be happy doing it. <i>- by <b>Carl Johnson</b></i></div>
+
     </body>
 </html>
