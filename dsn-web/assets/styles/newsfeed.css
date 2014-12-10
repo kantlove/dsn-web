@@ -5,36 +5,66 @@ div.header{
     width: 100%;
 	background: #0066ff;
     z-index: 2;
-    height: 80px;
+    height: 50px;
+}
+
+div.header > div {
+    float: right;
+}
+
+div.header img {
+    width: 100%;
+    height: 100%;
+}
+
+.div_new_post {
+    height: 100%;
+    width: 70px;
+    background: #0b4271;
+    margin-right: 10px;
+}
+
+.div_setting {
+    height: 100%;
+    width: 70px;
+    background: #0b4271;
+}
+
+.div_logout {
+    height: 100%;
+    width: 70px;
+    background: #0b4271;
+    margin-right: 20px;
 }
 
 .div_search {
-	margin: 0px 40px;
-	padding: 10px;
+    margin: 7px 20px;
 }
 
 #search_box {
-    width: 30%;
+    width: 450px;
+    overflow: hidden;
 }
 
 #search_box .wrapper {
     background: white;
     border: 0px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px 10px;
     position: relative;
+    margin: 0px;
 }
 
 #search_box input { 
 	border: 0px; 
 	padding: 2px;
-	font: bold 18px Arial, sans-serif; 
-	width: 85%; 
+	font: 14px Arial, sans-serif; 
+    width: 85%;
 }
 
 #search_box button {
     border: 0px;
-    width: 60px;
+    width: 50px;
     height: 100%;
     position: absolute;
     border-top-right-radius: 10px;
@@ -52,7 +82,7 @@ div.header{
 
 .main {
     position: relative;
-    margin-top: 80px;
+    margin-top: 50px;
     height: 1000px;
     background: #e4e7ee;
 }
@@ -204,13 +234,29 @@ ul {
     font-size: 20px;
     font-family: sans-serif;
     padding: 20px 0px;
+    position: relative;
+}
+
+.select_arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #e4e7ee;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .div_posts {
     padding: 25px 50px;
     width: 500px;
     overflow: hidden;
-    
+    font-weight: normal;
 }
 
 .div_post {
@@ -262,6 +308,25 @@ th {
 .div_post_comment {
     padding: 0px;
     margin: 0px;
+    text-align: left;
+}
+
+.div_post_progress {
+    width: 100%;
+    height: 20px;
+    background: #cacaca;
+    padding: 5px 0px;
+    color: #6e6e6e;
+    position: relative;
+}
+
+.div_post_progress_bar {
+    width: 2%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: red;
 }
 
 .div_post_image {
@@ -277,6 +342,7 @@ th {
 
 .div_post_status {
     padding: 5px 15px;
+    text-align: left;
 }
 
 .div_post_tags {
@@ -352,7 +418,61 @@ th {
     color: #4ee512;
 }
 
-.div_avatar_wrapper {
-    height: 100%;
+.right_panel {
     overflow: hidden;
 }
+
+.right_panel > div {
+    width: 260px;
+    background: white;
+    border-radius: 10px;
+    margin-top: 25px;
+    padding: 20px;
+}
+
+.div_same_dreams {
+    height: 210px;
+    overflow: hidden;
+}
+
+.div_same_dream {
+    margin: 10px;
+}
+
+.div_dream_tags {
+    height: 100px;
+    position: relative;
+}
+
+.div_dream_tags li {
+    float: left;
+    padding: 2px;
+    font-weight: normal;
+    color: #757575;
+}
+
+.div_dream_tags li:hover {
+    color: #0066ff;
+}
+
+.div_dream_tags ul {
+    overflow: hidden;
+    margin: 10px;
+}
+
+.div_dream_tags span {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.div_expand {
+    width: 100%;
+    height: 30px;
+    background: #f1f1f1;
+    position: absolute;
+    left: 0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    bottom: 0px;    
+}
+
