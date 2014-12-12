@@ -36,7 +36,6 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-
   '/signinprocess' :'SigninController.processSignin',
 
   '/signup' : {
@@ -47,6 +46,9 @@ module.exports.routes = {
   },
   '/mainpage':{
     view:'mainpage'
+  },
+  '/newsfeed': {
+    view: 'newsfeed'
   }
 
 

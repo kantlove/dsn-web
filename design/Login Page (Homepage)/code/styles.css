@@ -1,0 +1,193 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe WP", sans-serif;
+    background-color: #151621;
+}
+
+div#topBar{
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0; 
+    color: white;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    
+    background-color: rgba(103, 114, 173, 0.54);
+    -webkit-transition:background 0.5s;
+    -moz-transition:background 0.5s;
+    -o-transition:background 0.5s;
+    transition:background 0.5s
+}
+
+div#topBar:hover{
+    background-color: rgba(103, 114, 173, 1);
+}
+
+div#topBar>p{
+    font-weight: bolder;
+    position: relative;
+    top: -50%;
+    transform: translateY(50%);
+    padding-left: 30px;
+}
+
+div#bgDiv{
+    margin-top: 0px;
+    background-color: purple;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+div#formDiv{
+    position: fixed;
+    top: 140px;
+    right: 50px;
+    z-index: 1;
+}
+
+div[id^="sign"]{
+    max-width: 250px;
+    background: rgba(255, 255, 255, 1);
+    padding: 20px 20px 45px 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+div#signinDiv{
+    
+}
+
+div#signupDiv{
+    padding: 5px 20px 45px 20px;
+}
+
+div#signupDiv > p {
+    font-weight: bold;
+    color: black;
+}
+
+form>div{
+    margin: 5px 5px 5px 0px;
+}
+
+input{
+    background-color: white;
+}
+
+input.userInfo{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid lightGray;
+    margin: 0px 0px 5px 0px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+div#textDiv{
+    font-size: 110%;
+    font-family: "Segoe WP", sans-serif;
+    position: fixed;
+    left: 30px;
+    color: White;
+    margin: 10px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+div#dreamDiv{
+    font-family: "Segoe WP", sans-serif;
+    position: fixed;
+    max-width: 400px;
+    left: 30px;
+    color: White;
+    margin: 10px;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+}
+
+div#buttonDiv{
+    margin: 0px;
+}
+
+button[id^="sign"]{
+    font-weight: bolder;
+    float: right;
+    padding: 8px;
+    width: 80px;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+}
+
+button#signinBtn{
+    background-color: #4545e0;
+}
+
+button#signupBtn{
+    background-color: #ce6d19;
+}
+
+button#signinBtn:hover{
+    background-color: #272779;
+}
+
+button#signupBtn:hover{
+    background-color: #864b17;
+}
+
+div#botDiv{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    color: white;
+    padding: 15px 10px 10px 10px;
+}
+
+div#botDiv > p{
+    position: fixed;
+    margin: 10px;
+}
+
+p#botText{
+    font-weight: lighter;
+    font-size: 90%;
+    text-align: justify;
+}
+
+p#author{
+    font-style: italic;
+}
+
+a{
+    font-weight: bolder;
+    text-decoration: none;
+    color: #2863ce;
+}
+
+a.menuBtn{
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+a.menuBtn:hover{
+    text-shadow: 1px 1px 5px black;
+    border-radius: 5px;
+    background-color: #6772ad;
+}
+
+a.author{
+    
+    color: white;
+}
+

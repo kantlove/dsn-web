@@ -43,12 +43,13 @@ function getSessionInfo(sessionID,callbackSuccess,callbackError) {
 	});
 }
 
-function getUserDreams(sessionID, userId, offSet, limit, callbackSuccess, callbackError) {
+
+function getUserDream(sessionID,userID,callbackSuccess,callbackError){
+
 	$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/user/dreams?sessionId=" + sessionID + "&userId=" + userId + "&offset=" + offSet + "&limit=" + limit,
-		success: function(data, textStatus, jqXHR) {
-			// Check if callbackSuccess is a function
+		url: "http://dreamyday.tk:80/user/dreams?sessionId="+sessionID+"&userId="+userID,
+		success: function (data,textStatus,jqXHR){
 			if (typeof(callbackSuccess) == "function") {
 				callbackSuccess(data, textStatus, jqXHR);
 			}
@@ -58,9 +59,9 @@ function getUserDreams(sessionID, userId, offSet, limit, callbackSuccess, callba
 			if (typeof(callbackError) == "function") {
 				callbackError(xhRequest, ErrorText, thrownError);
 			}
-		}
+		}		
 	})
-	.done(function(msg) {
+	.done(function(msg){
 		console.log("requested");
 	});
 }

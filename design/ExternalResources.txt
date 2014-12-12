@@ -1,0 +1,10 @@
+Search Image:
+http://www.iconsdownload.net/icons/256/10287-heart-shape-thick-outline-icon.png
+http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/chat-icon.png
+http://www.decorapapeldeparede.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/p/a/papel_de_parede_c_u_noturno_ff017.jpg
+
+Font:
+ariel, sans-serif
+
+Font for number:
+Dosis, sans-serif (find on google font)
