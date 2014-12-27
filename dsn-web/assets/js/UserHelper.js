@@ -1,7 +1,7 @@
 function getUserInfo(sessionID, userId, callbackSuccess, callbackError) {
 		$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/user?sessionId=" + sessionID + "&userId=" + userId,
+		url: "http://dreamyday.tk:80/user?sessionId=" + sessionID + "&user_id=" + userId,
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
 			if (typeof(callbackSuccess) == "function") {

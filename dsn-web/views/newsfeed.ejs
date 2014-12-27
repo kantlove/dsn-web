@@ -1,4 +1,4 @@
-
+	
 <div class="header"> 
 	<div class="div_logout">
 		<a href="#"><img src="/images/Logout.png"></a>
@@ -40,20 +40,17 @@
 		<div class="div_following">Following
 			<div class="div_followers">
 				<ul>
-					<li>
-						<div class="div_follower">
-							<div class="div_follower_avatar"></div>
-							<div class="div_follower_info">Mill K. Smith</div>
-							<div class="div_follower_number">1</div>
-						</div>
-					</li>
-					<li>
-						<div class="div_follower">
-							<div class="div_follower_avatar"></div>
-							<div class="div_follower_info">Nguyễn Đăng Kỳ</div>
-							<div class="div_follower_number">7</div>
-						</div>
-					</li>
+					<% var followers = ['Mill K. Smith', 'Nguyễn Đăng Kỳ']; %>
+					<% var followers_num = [1, 7]; %>
+					<% for (var i=0; i<followers.length; i++) { %>
+						<li>
+							<div class="div_follower">
+								<div class="div_follower_avatar"></div>
+								<div class="div_follower_info"><%= followers[i] %></div>
+								<div class="div_follower_number"><%= followers_num[i] %></div>
+							</div>
+						</li>
+					<% } %>
 				</ul>
 			</div>
 		</div>
@@ -97,9 +94,10 @@
 						<div class="div_post_status">I want to make some art this way!</div>
 						<div class="div_post_tags">
 							<ul>
-								<li>#latte</li>
-								<li>#art</li>
-								<li>#coffee</li>
+								<% var post_tags = ['#latte', '#art', '#coffee'] %>
+								<% for (var i=0; i<post_tags.length; i++) { %> 
+									<li> <%= post_tags[i] %> </li>
+								<% } %>
 							</ul>
 						</div>
 						<div class="div_post_like">
@@ -167,45 +165,21 @@
 			<th>
 				<div class="right_panel">
 					<div class="div_same_dreams">
-						<div class="div_same_dream">
-							<table>
-								<th><div class="div_post_avatar"></div> </th>
-								<th>
-									<p class="div_post_comment">
-										<span class="div_post_user_name"> 
-											<a href="##">Renka Sangu</a> 
-										</span> 
-									</p>
-									<div class="div_post_time">10 same dreams with you</div>	
-								</th>
-							</table>
-						</div>
-						<div class="div_same_dream">
-							<table>
-								<th><div class="div_post_avatar"></div> </th>
-								<th>
-									<p class="div_post_comment">
-										<span class="div_post_user_name"> 
-											<a href="##">Renka Sangu</a> 
-										</span> 
-									</p>
-									<div class="div_post_time">10 same dreams with you</div>	
-								</th>
-							</table>
-						</div>
-						<div class="div_same_dream">
-							<table>
-								<th><div class="div_post_avatar"></div> </th>
-								<th>
-									<p class="div_post_comment">
-										<span class="div_post_user_name"> 
-											<a href="##">Renka Sangu</a> 
-										</span> 
-									</p>
-									<div class="div_post_time">10 same dreams with you</div>	
-								</th>
-							</table>
-						</div>
+						<% for (var i=0; i<3; i++) { %>
+							<div class="div_same_dream">
+								<table>
+									<th><div class="div_post_avatar"></div> </th>
+									<th>
+										<p class="div_post_comment">
+											<span class="div_post_user_name"> 
+												<a href="##">Renka Sangu</a> 
+											</span> 
+										</p>
+										<div class="div_post_time">10 same dreams with you</div>	
+									</th>
+								</table>
+							</div>
+						<% } %>
 					</div>
 					<div class="div_dream_tags">
 						<p class="div_post_comment">
@@ -214,13 +188,10 @@
 							</span> 
 							<span>
 								<ul>
-									<li>#abc</li>
-									<li>#eds</li>
-									<li>#redandblue</li>
-									<li>#flora</li>
-									<li>#alice</li>
-									<li>#wonderland</li>
-									<li>#adventure</li>
+									<% var dream_tags = ['#abc', '#eds', '#redandblue', '#flora', '#alice', '#wonderland', '#adventure'] %>
+									<% for (var i=0; i<dream_tags.length; i++) { %>
+										<li> <%= dream_tags[i] %> </li>
+									<% } %>
 								</ul>
 							</span>
 						</p>
@@ -229,8 +200,24 @@
 				</div>
 			</th>
 		</table>
-
 	</div>
-
-	
 </div>
+
+<script type="text/javascript">
+	var sessionID=localStorage.getItem("session_id");
+	function getDream() {
+		console.log('After '+ sessionID);
+        getNewsfeedDream(sessionID,
+            function success(data,textStatus,jqXHR){
+                console.log(data);
+                var te=data.text;
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Can not get the dream');
+            }
+        );  
+	}
+	getDream();
+</script>
+
+
