@@ -22,6 +22,12 @@ $(document).ready(function(e) {
         var posts = $('#userPosts');
         var itemList = $('.postItem');
         var totalH = 0, itemPadding = 10, margin = 50;
+        // setting button
+        var isSettingOpened = false;
+        $('#settingBtn').click(function() {
+            isSettingOpened == false? $('li.has-sub ul').css({visibility: 'visible'}) : $('li.has-sub ul').css({visibility: 'collapse'});
+            isSettingOpened = !isSettingOpened;
+        });
 
         // align the list
         posts.css({left: pageWidth / 4});
@@ -34,12 +40,22 @@ $(document).ready(function(e) {
             $(this).css({top: totalH});
             $(this).height(itemH + itemPadding * 2); // 10 is padding
             $(this).children('.postImg').width($(this).width() + itemPadding * 2);
-            console.log($(this).children('.postImg'));
+            //console.log($(this).children('.postImg'));
             totalH += itemH + itemPadding * 2 + margin;
         });
 
+        // align buttons on menu   
+        var cnt = $('#avatarDiv').position().left + $('#avatarDiv').width();
+        $.each($('#userMenu').children('button.userMenuItem'), function(idx, value) {
+            $(value).css({left: cnt});
+            cnt += $(value).width();
+        });
+        var followBtn = $('#followBtn');
+        if(followBtn != null)
+            followBtn.css({left: cnt + 100});
+
         posts.height(totalH);
-        
+
         $('#bodyDiv').height(posts.height() + 60);
     }
 
@@ -50,8 +66,16 @@ $(document).ready(function(e) {
         <div id="bodyDiv"></div>
         <div id="topBar">
             <form method="get">
-                <input id="search" type="text" placeholder="search..."/>
-            </form>
+                <input id="search" type="text" placeholder="Search..."/>
+                <button id="searchBtn" type="submit"></button>
+            </form>     
+            <li class='has-sub'><a href='#'><button id="settingBtn"></button></a>
+                <ul>
+                    <li><a href='#'><span>Account</span></a></li>
+                    <div class="divider"></div>
+                    <li><a href='#'><span>Logout</span></a></li>
+                </ul>
+            </li>
         </div>
         <div id="coverDiv"></div>
 
@@ -60,6 +84,7 @@ $(document).ready(function(e) {
             <button class="userMenuItem">Profile</button>
             <button class="userMenuItem">Photo</button>
             <button class="userMenuItem">Following</button>
+            <button id="followBtn">Follow</button>
         </div>
         <div id="avatarDiv"></div>
         <div id="userPosts">
