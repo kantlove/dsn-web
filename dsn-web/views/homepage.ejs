@@ -147,10 +147,11 @@
                 var password = $('#password');
                 signin(username.val(),password.val(),
                     function sucessSignin(data, textStatus, jqXHR){
-                                    localStorage.setItem("sessionID",data.session_id);
+                                    localStorage.setItem("sessionID",data.message.id);
+                                    localStorage.setItem("userId",data.message.user_id);
                                     localStorage.setItem("username",username.val());
                                     localStorage.setItem("password",password.val());
-                                    console.log(data);
+                                    console.log(data.message.id);
                                     if (document.getElementById("remember").checked==true){
                                         localStorage.setItem("remindMe",1);
                                     }
@@ -174,7 +175,7 @@
                 signup(username_reg.val(),password_reg.val(),fullname_reg.val(),email.val(),
                     function successSignup(data, textStatus, jqXHR){
                         alert('Welcome on Dreamy Day');
-                        localStorage.setItem("sessionID",data.session_id);
+                        localStorage.setItem("sessionID",data.message.id);
                         localStorage.setItem("username",username_reg.val());
                         localStorage.setItem("password",password_reg.val());
                         window.location='/mainpage';

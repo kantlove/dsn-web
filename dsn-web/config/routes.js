@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'home'
+    view: 'homepage'
   },
 
   '/signinprocess' :'SigninController.processSignin',
