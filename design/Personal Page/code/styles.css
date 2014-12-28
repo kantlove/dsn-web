@@ -274,6 +274,10 @@ div.postTags > a {
     text-decoration: none;
 }
 
+div.postTags > a: hover {
+    font-weight: bold;
+}
+
 div.postStat {
     position: relative;
     top: 50px;
@@ -284,6 +288,27 @@ div.postStat {
 div.postStat > span {
     width: 100px;
     margin-right: 50px;
+}
+
+button.likeBtn {
+    margin-left: 5px;
+    height: 15px;
+    border: none;
+    background-color: transparent;
+    background-image: url(heart.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+
+span.commentSpan {
+    margin-left: -30px;
+}
+
+img.cmtImg {
+    margin-left: 3px;
+    height: 13px;
+    content: url(comment-hover.png);
 }
 
 button.expandBtn {
@@ -341,7 +366,18 @@ div.cmtPoster {
     font-weight: 500;
 }
 
+a#toTop {
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+}
 
-
-
+a#toTop > img {
+    height: 50px;
+    width: 50px;
+    content: url(up_arrow.png);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+}
 
