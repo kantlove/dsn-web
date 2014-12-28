@@ -1,5 +1,27 @@
-	
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="/js/UserNewsfeedHelper.js"></script>
+
+<script type="text/javascript">
+	var sessionID=localStorage.getItem("sessionID");
+	function getDreams() {
+		console.log('After '+ sessionID);
+        getNewsfeedDream(sessionID,
+            function success(data,textStatus,jqXHR){
+                console.log(data);
+                var te=data.text;
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get the dream: ' + ErrorText);
+            }
+        );  
+	}
+	//getDream();
+</script>
+
 <div class="header"> 
+	<button id="testBtn" onclick="getDreams()">Get dream</button>
 	<div class="div_logout">
 		<a href="#"><img src="/images/Logout.png"></a>
 	</div>
@@ -202,22 +224,5 @@
 		</table>
 	</div>
 </div>
-
-<script type="text/javascript">
-	var sessionID=localStorage.getItem("session_id");
-	function getDream() {
-		console.log('After '+ sessionID);
-        getNewsfeedDream(sessionID,
-            function success(data,textStatus,jqXHR){
-                console.log(data);
-                var te=data.text;
-        	},
-            function error(xhRequest, ErrorText, thrownError){
-                console.log('Can not get the dream');
-            }
-        );  
-	}
-	getDream();
-</script>
 
 

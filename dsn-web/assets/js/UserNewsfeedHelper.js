@@ -1,4 +1,4 @@
-function getNewsfeedDream(sessionID,callbackSuccess,callbackError) {
+function getNewsfeedDream(sessionID,dreamID,callbackSuccess,callbackError) {
 	$.ajax({
 		type: "GET",
 		url: "http://dreamyday.tk:80/user/newsfeed?session_id="+sessionID,

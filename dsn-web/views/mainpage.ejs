@@ -32,7 +32,6 @@
             function onSuccess(data, textStatus, jqXHR){
                 console.log(data);
                 var userID = data.user_id;
-                localStorage.setItem("userId",data.user_id);
                 var sessionID=localStorage.getItem("sessionID");  
                 console.log('Before'+userID+sessionID);
                 
@@ -78,18 +77,21 @@
 
             function postdream(){
                 var text = $("#dream").val(); 
-                var sessionID=localStorage.getItem("sessionID");  
+                var sessionID=localStorage.getItem("sessionID");
+                console.log('Posting dream: ' + text + ' with session ID: ' + sessionID);
                 postDream(sessionID, text, callbackSuccesspostDream, callbackErrorpostDream);
             }
             
         </script>
         <br></b>
-        <button type="button" onclick="getdream()"> get dream</button><br></br>
+        <button type="button" onclick="getdream()">Go to news feed</button><br></br>
         <script>
         var sessionID=localStorage.getItem("sessionID");
         var userID=localStorage.getItem("userId");
             function getdream(){
                 console.log('After '+ sessionID+ userID);
+                window.location='/newsfeed';
+                /*
                 getUserDream(sessionID,userID ,
                     function success(data,textStatus,jqXHR){
                         console.log(data);
@@ -99,8 +101,9 @@
                         console.log('Can not get the dream');
                     }
                 );  
+*/
             }
-            write(te);
+            //write(te);
             </script>
     </body>
 </html>
