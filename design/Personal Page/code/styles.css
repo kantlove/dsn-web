@@ -346,9 +346,9 @@ div.commentItem {
 
 div.cmtAvatar {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
     background: lightGray;
     background-image: url(commenter2.jpg);
     background-repeat: no-repeat;
@@ -358,7 +358,8 @@ div.cmtAvatar {
 
 div.cmtContent {
     position: relative;
-    left: 50px;
+    top: -5px;
+    left: 40px;
     width: 430px;;
 }
  
@@ -378,6 +379,52 @@ a#toTop > img {
     content: url(up_arrow.png);
     background-color: white;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px black;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+a#toTop > img:active {
+    background-color: #ccc;
+}
+
+div.userCmtAvatar {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+    background: lightGray;
+    background-image: url(user1.JPG);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+div.commentForm {
+    position: relative;
+    top: 60px;
+    left: 7px;
+}
+
+div.commentForm textarea {
+    position: relative;
+    top: 3px;
+    left: 40px;
+    width: 370px;
+    height: 25px;
+}
+
+div.commentForm textarea::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999;
+}
+
+div.commentForm button {
+    position: relative;
+    top: -9px;
+    left: 50px;
+    height: 30px;
+    width: 50px;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
 }
 
