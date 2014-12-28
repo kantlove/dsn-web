@@ -34,6 +34,10 @@ $(document).ready(function(e) {
 
         // align each item
         $.each(itemList, function() {
+            // 
+            var comments = $(this).children('.commentList');
+            
+            // recalculate height
             var lastChild = $(this).children().last();
             var itemH = lastChild.position().top + lastChild.last().height() - 30;
 
@@ -96,12 +100,26 @@ $(document).ready(function(e) {
                 </div>
 
                 <div class="postImg"></div>
-                <div class="postContent">I dream a dream about something</div>
+                <div class="postContent">I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something</div>
                 <div class="postStat">
                     <span><a>120</a><img class="likeImg"/></span>
                     <span><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                <div class="divider2"></div>
+                <div class="commentList">
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>
+                            Good one!
+                        </div>
+                    </div>
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>Congratulation dude nice job hahah :D HUEHUEHUEHUEHUEHUEHUEHUEHUEHUE Good night keep calm and sleep zzZ</div>
+                    </div>
+                </div>
             </div>
             <div id="post2" class="postItem">
                 <div class="userImg"></div>
@@ -117,7 +135,15 @@ $(document).ready(function(e) {
                     <span><a>120</a><img class="likeImg"/></span>
                     <span><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                <div class="divider2"></div>
+                <div class="commentList">
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>g9 my love. We'll meet tomorrow I hope ^_^</div>
+                    </div>
+                </div>
+<!--                <button class="expandBtn">View full story</button>-->
             </div>
             <div id="post3" class="postItem">
                 <div class="userImg"></div>
@@ -133,7 +159,7 @@ $(document).ready(function(e) {
                     <span><a>120</a><img class="likeImg"/></span>
                     <span><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                
             </div>
         </div>
     </body>

@@ -300,6 +300,47 @@ button.expandBtn {
 }
 
 
+div.divider2 {
+    position: relative;
+    top: 57px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.15);
+    
+}
+
+div.commentList {
+    position: relative;
+    top: 65px;
+}
+
+div.commentItem {
+    height: auto;
+    padding: 5px;
+    margin: 3px;
+}
+
+div.cmtAvatar {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background: lightGray;
+    background-image: url(commenter2.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+div.cmtContent {
+    position: relative;
+    left: 50px;
+    width: 430px;;
+}
+ 
+div.cmtPoster {
+    font-weight: 500;
+}
+
 
 
 
