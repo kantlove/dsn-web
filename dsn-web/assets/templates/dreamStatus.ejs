@@ -56,38 +56,28 @@
 	</div>
 	<div class="div_post_comments">
 		<ul>
-			<li>
-				<div class="div_post_info">
-					<table>
-						<th><div class="div_post_avatar"></div> </th>
-						<th>
-							<p class="div_post_comment">
-								<span class="div_post_user_name"> 
-									<a href="##">Latte art shinobi</a> 
-								</span> 
-								<span class="div_post_dream">Shall I show u the secret scroll *fake log*hhhhhhhhhhhhhhhhhhh h h h h h h h h h h h h h h haksjfjasdfljsadlkfj sakdjf;laksjdf skdjflasj;df kjslkdf</span>
-							</p>
-							<div class="div_post_time">6 minutes ago</div>	
-						</th>
-					</table>
-				</div>
-			</li>
-			<li>
-				<div class="div_post_info">
-					<table>
-						<th><div class="div_post_avatar"></div> </th>
-						<th>
-							<p class="div_post_comment">
-								<span class="div_post_user_name"> 
-									<a href="##">Latte art lover</a> 
-								</span> 
-								<span class="div_post_dream">Show me some latter on, ok ^^~</span>
-							</p>
-							<div class="div_post_time">4 minutes ago</div>	
-						</th>
-					</table>
-				</div>
-			</li>
+			<% for (var i=0; i<comments.length; i++) { %>
+				<li>
+					<div class="div_post_info">
+						<table>
+							<th>
+								<div class="div_post_avatar">
+									<%= img_tag(comments[i].user.avatar) %>
+								</div> 
+							</th>
+							<th>
+								<p class="div_post_comment">
+									<span class="div_post_user_name"> 
+										<a href="##"> <%= comments[i].user.fullname %> </a> 
+									</span> 
+									<span class="div_post_dream"> <%= comments[i].text %></span>
+								</p>
+								<div class="div_post_time"><%= comments[i].created_at %></div>	
+							</th>
+						</table>
+					</div>
+				</li>
+			<% } %>
 		</ul>
 		<div class="div_write_comment">
 			<form action="#" id="write_comment">
