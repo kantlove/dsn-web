@@ -15,9 +15,9 @@ $(document).ready(function(e) {
         return false;
     });
 
-    //-------------------
+    //------------------------
     // User menu buttons
-    //-------------------
+    //------------------------
     // user post
     $("button#userPost").click(function() {
         console.log('user post click!'); 
@@ -38,20 +38,23 @@ $(document).ready(function(e) {
         console.log('user follower click!'); 
     });
     
-    //-------------------
+    //------------------------
     // Search buttons
-    //-------------------
+    //------------------------
     // search button
-    $('button#searchBtn').click(function() {
+    $('button#searchBtn').click(function(e) {
         console.log('search btn click!'); 
         
         var text = $('input#search').text();
-        $('input#search').text('aaaa');       
+        $('input#search').text('aaaa');  
+        
+        // prevent the page from scrolling to top
+        e.preventDefault();
     });
     
-    //-------------------
+    //------------------------
     // Send comment buttons
-    //-------------------
+    //------------------------
     // send comment
     $('button.sendCmt').click(function() {
         // get id to identify which post
@@ -62,9 +65,9 @@ $(document).ready(function(e) {
         console.log(text, 'send comment for post ' + id.slice(-1)); 
     });
     
-    //-------------------
+    //------------------------
     // Like buttons
-    //-------------------
+    //------------------------
     // like button on each post
     $('button.likeBtn').click(function() {
         // get id to identify which post
@@ -73,22 +76,35 @@ $(document).ready(function(e) {
         console.log('like button on post ' + id.slice(-1));
     });
     
-    //-------------------
+    //------------------------
     // Setting buttons
-    //-------------------
+    //------------------------
+    // setting btn click(button on top right corner)
+    $('button#settingBtn').click(function(e) {
+        console.log('setting open!');
+        
+        // prevent the page from scrolling to top
+        e.preventDefault();
+    });
+    
     // account setting btn
-    $('a#accSetting').click(function() {
+    $('a#accSetting').click(function(e) {
        console.log('account setting click!'); 
+        // prevent the page from scrolling to top
+        e.preventDefault();
     });
     
     // log out
-    $('a#logout').click(function() {
+    $('a#logout').click(function(e) {
        console.log('log out!'); 
+        
+        // prevent the page from scrolling to top
+        e.preventDefault();
     });
 
-    //-------------------
+    //------------------------
     // Functions
-    //-------------------
+    //------------------------
     function arrangeElmts() {
         var pageWidth = $(document).width(), pageHeight = $(document).height();
         var posts = $('#userPosts');
