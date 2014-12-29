@@ -189,14 +189,14 @@ $(document).ready(function(e) {
     }
 
     function blockScrolling() {
-        $('html, body').css({
+        $('body').css({
             'overflow': 'hidden',
             'height': '100%'
         });
     }
 
     function restoreScrolling() {
-        $('html, body').css({
+        $('body').css({
             'overflow': 'scroll',
             'height': 'auto'
         });
