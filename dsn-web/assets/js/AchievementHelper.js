@@ -1,83 +1,8 @@
-function postDream(sessionID, text, callbackSuccess, callbackError) {
-	$.ajax({
-	type: "POST",
-	url: "http://dreamyday.tk:80/dream",
-	data: {
-		session_id: sessionID,
-		text: text
-
-	},
-	success: function(data, textStatus, jqXHR){
-		// Check if callbackSuccess is a function
-		if (typeof(callbackSuccess) == "function") {
-			callbackSuccess(data, textStatus, jqXHR);
-		}
-	},
-	error: function(xhRequest, ErrorText, thrownError) {
-		// Check if callbackError is a function
-		if (typeof(callbackError) == "function") {
-			callbackError(xhRequest, ErrorText, thrownError);
-		}
-	}
-	})
-	.done(function(msg){
-		console.log("requested");
-	});
-}
-
-function getDream(sessionID,dreamID,callbackSuccess,callbackError) {
-	$.ajax({
-		type: "GET",
-		url: "http://dreamyday.tk:80/dream?session_id="+sessionID+"&dream_id="+dreamID,
-		success: function (data,textStatus,jqXHR){
-			if (typeof(callbackSuccess) == "function") {
-				callbackSuccess(data, textStatus, jqXHR);
-			}
-		},
-		error: function(xhRequest, ErrorText, thrownError) {
-			// Check if callbackError is a function
-			if (typeof(callbackError) == "function") {
-				callbackError(xhRequest, ErrorText, thrownError);
-			}
-		}
-	})
-	.done(function(msg){
-		console.log("requested");
-	});
-}
-
-function removeDream(sessionID, dreamID, callbackSuccess, callbackError) {
-	$.ajax({
-	type: "DELETE",
-	url: "http://dreamyday.tk:80/dream/",
-	data: {
-		session_id: sessionID,
-		dream_id: dreamID
-
-	},
-	success: function(data, textStatus, jqXHR){
-		// Check if callbackSuccess is a function
-		if (typeof(callbackSuccess) == "function") {
-			callbackSuccess(data, textStatus, jqXHR);
-		}
-	},
-	error: function(xhRequest, ErrorText, thrownError) {
-		// Check if callbackError is a function
-		if (typeof(callbackError) == "function") {
-			callbackError(xhRequest, ErrorText, thrownError);
-		}
-	}
-	})
-	.done(function(msg){
-		console.log("requested");
-	});
-}
-
-// === Comment functions ====
-function commentDream(sessionID, dreamID, text, callbackSuccess, callbackError) {
+// === Main functions ===
+function postAchievement(sessionID, dreamID, text, callbackSuccess, callbackError) {
 	$.ajax({
 		type: "POST",
-		url: "http://dreamyday.tk:80/dream/comment/",
+		url: "http://dreamyday.tk:80/achievement/",
 		data: {
 			session_id: sessionID,
 			dream_id: dreamID,
@@ -101,13 +26,35 @@ function commentDream(sessionID, dreamID, text, callbackSuccess, callbackError) 
 	});
 }
 
-function removeCommentDream(sessionID, commentID, callbackSuccess, callbackError) {
+function getAchievement(sessionID, achievementID, callbackSuccess, callbackError) {
+	$.ajax({
+		type: "GET",
+		url: "http://dreamyday.tk:80/achievement?session_id="+sessionID+"&achievement_id="+achievementID,
+		success: function(data, textStatus, jqXHR){
+			// Check if callbackSuccess is a function
+			if (typeof(callbackSuccess) == "function") {
+				callbackSuccess(data, textStatus, jqXHR);
+			}
+		},
+		error: function(xhRequest, ErrorText, thrownError) {
+			// Check if callbackError is a function
+			if (typeof(callbackError) == "function") {
+				callbackError(xhRequest, ErrorText, thrownError);
+			}
+		}
+	})
+	.done(function(msg){
+		console.log("requested");
+	});
+}
+
+function removeAchievement(sessionID, achievementID, callbackSuccess, callbackError) {
 	$.ajax({
 		type: "DELETE",
-		url: "http://dreamyday.tk:80/dream/comment/",
+		url: "http://dreamyday.tk:80/achievement/",
 		data: {
 			session_id: sessionID,
-			dream_comment_id: commentID
+			achievement_id: achievementID
 		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
@@ -127,14 +74,15 @@ function removeCommentDream(sessionID, commentID, callbackSuccess, callbackError
 	});
 }
 
-// === Like functions ====
-function likeDream(sessionID, dreamID, callbackSuccess, callbackError) {
+// === Comment functions ===
+function commentAchievement(sessionID, achievementID, text, callbackSuccess, callbackError) {
 	$.ajax({
 		type: "POST",
-		url: "http://dreamyday.tk:80/dream/like/",
+		url: "http://dreamyday.tk:80/achievement/comment/",
 		data: {
 			session_id: sessionID,
-			dream_id: dreamID
+			achievement_id: achievementID,
+			text: text
 		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
@@ -154,13 +102,66 @@ function likeDream(sessionID, dreamID, callbackSuccess, callbackError) {
 	});
 }
 
-function removeLikeDream(sessionID, dreamID, callbackSuccess, callbackError) {
+function removeCommentAchievement(sessionID, commentID, callbackSuccess, callbackError) {
 	$.ajax({
 		type: "DELETE",
-		url: "http://dreamyday.tk:80/dream/like/",
+		url: "http://dreamyday.tk:80/achievement/comment/",
 		data: {
 			session_id: sessionID,
-			dream_id: dreamID
+			achievement_comment_id: commentID
+		},
+		success: function(data, textStatus, jqXHR){
+			// Check if callbackSuccess is a function
+			if (typeof(callbackSuccess) == "function") {
+				callbackSuccess(data, textStatus, jqXHR);
+			}
+		},
+		error: function(xhRequest, ErrorText, thrownError) {
+			// Check if callbackError is a function
+			if (typeof(callbackError) == "function") {
+				callbackError(xhRequest, ErrorText, thrownError);
+			}
+		}
+	})
+	.done(function(msg){
+		console.log("requested");
+	});
+}
+
+// === Like functions ===
+function likeAchievement(sessionID, achievementID, callbackSuccess, callbackError) {
+	$.ajax({
+		type: "POST",
+		url: "http://dreamyday.tk:80/achievement/like/",
+		data: {
+			session_id: sessionID,
+			achievement_id: achievementID
+		},
+		success: function(data, textStatus, jqXHR){
+			// Check if callbackSuccess is a function
+			if (typeof(callbackSuccess) == "function") {
+				callbackSuccess(data, textStatus, jqXHR);
+			}
+		},
+		error: function(xhRequest, ErrorText, thrownError) {
+			// Check if callbackError is a function
+			if (typeof(callbackError) == "function") {
+				callbackError(xhRequest, ErrorText, thrownError);
+			}
+		}
+	})
+	.done(function(msg){
+		console.log("requested");
+	});
+}
+
+function removeLikeAchievement(sessionID, achievementID, callbackSuccess, callbackError) {
+	$.ajax({
+		type: "DELETE",
+		url: "http://dreamyday.tk:80/achievement/like/",
+		data: {
+			session_id: sessionID,
+			achievement_id: achievementID
 		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
