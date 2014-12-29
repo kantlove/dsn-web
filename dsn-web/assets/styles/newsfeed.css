@@ -81,9 +81,12 @@ div.header img {
 }
 
 .main {
-    position: relative;
-    margin-top: 50px;
-    height: 1000px;
+    position: absolute;
+    overflow: auto;
+    top: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     background: #e4e7ee;
 }
 
@@ -131,11 +134,10 @@ div.header img {
 
 .div_following {
     color: red;
-    position: absolute;
+    position: relative;
     background-color: #f1f1f1;
-    width: 260px;
+    height: 90%;
     top: 250px;
-    min-height: 700px;
     padding: 20px;
     font-weight: bold;
     font-size: 20px;
@@ -192,7 +194,6 @@ ul {
     font-weight: bold;
     font-size: 20px;
     padding: 5px;
-
 }
 
 .div_dream:hover {
@@ -260,6 +261,7 @@ ul {
 }
 
 .div_post {
+    margin-bottom: 40px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -303,6 +305,11 @@ th {
     width: 50px;
     height: 50px;
     background-color: #cacaca;
+}
+
+.div_post_avatar > img {
+    width: 50px;
+    height: 50px;
 }
 
 .div_post_comment {

@@ -1,7 +1,7 @@
 function getUserInfo(sessionID, userId, callbackSuccess, callbackError) {
 		$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/user?sessionId=" + sessionID + "&user_id=" + userId,
+		url: "http://dreamyday.tk:80/user?session_id=" + sessionID + "&user_id=" + userId,
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
 			if (typeof(callbackSuccess) == "function") {
@@ -24,7 +24,7 @@ function getSessionInfo(sessionID,callbackSuccess,callbackError) {
 
 	$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/session?sessionId="+sessionID,
+		url: "http://dreamyday.tk:80/session?session_id="+sessionID,
 		success: function (data,textStatus,jqXHR){
 			// Check if callbackSuccess is a function
 			if (typeof(callbackSuccess) == "function") {
@@ -48,7 +48,7 @@ function getUserDream(sessionID,userID,callbackSuccess,callbackError){
 
 	$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/user/dreams?sessionId="+sessionID+"&userId="+userID,
+		url: "http://dreamyday.tk:80/user/dreams?session_id="+sessionID+"&userId="+userID,
 		success: function (data,textStatus,jqXHR){
 			if (typeof(callbackSuccess) == "function") {
 				callbackSuccess(data, textStatus, jqXHR);

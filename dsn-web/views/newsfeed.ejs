@@ -1,27 +1,12 @@
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script type="text/javascript" src="/js/ejs_production.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
 <script src="/js/UserNewsfeedHelper.js"></script>
 
-<script type="text/javascript">
-	var sessionID=localStorage.getItem("sessionID");
-	function getDreams() {
-		console.log('After '+ sessionID);
-        getNewsfeedDream(sessionID,
-            function success(data,textStatus,jqXHR){
-                console.log(data);
-                var te=data.text;
-        	},
-            function error(xhRequest, ErrorText, thrownError){
-                console.log('Cannot get the dream: ' + ErrorText);
-            }
-        );  
-	}
-	//getDream();
-</script>
-
 <div class="header"> 
-	<button id="testBtn" onclick="getDreams()">Get dream</button>
+	<!-- <button id="testBtn" onclick="getDreams()">Get dream</button> -->
 	<div class="div_logout">
 		<a href="#"><img src="/images/Logout.png"></a>
 	</div>
@@ -91,97 +76,7 @@
 		<table>
 			<th>
 				<div class="div_posts">
-					<div class="div_post">
-						<div class="div_post_info">
-							<table>
-								<th>
-									<div class="div_post_avatar"></div>
-								</th>
-								<th>
-									<p>
-										<span class="div_post_user_name"> 
-											<a href="##">Mill K. Smith</a> 
-										</span>
-										<span class="div_post_dream">dreams to make a latte art.</span>
-									</p>
-									<div class="div_post_time">5 minutes ago</div>
-								</th>
-							</table>
-						</div>
-						<div class="div_post_progress">
-							The jour ney has just began.
-							<div class="div_post_progress_bar"></div>
-						</div>
-						<div class="div_post_image"> <img src="/images/Post_Image.png"/> </div>
-						<div class="div_post_status">I want to make some art this way!</div>
-						<div class="div_post_tags">
-							<ul>
-								<% var post_tags = ['#latte', '#art', '#coffee'] %>
-								<% for (var i=0; i<post_tags.length; i++) { %> 
-									<li> <%= post_tags[i] %> </li>
-								<% } %>
-							</ul>
-						</div>
-						<div class="div_post_like">
-							<ul>
-								<li>
-									<div class="num_likes">1.2K</div>
-									<div class="like_icon"><img src="/images/heart.png" onmouseover="this.src='/images/heart-hover.png'" onmouseout="this.src='/images/heart.png'"/></div>
-								</li>
-								<li>
-									<div class="num_comments">2.4K</div>
-									<div class="comment_icon"><img src="/images/comment.png" onmouseover="this.src='/images/comment-hover.png'" onmouseout="this.src='/images/comment.png'"/></div>
-								</li>
-								<li class="div_share">
-									<div class="num_shares">2</div>
-									<div class="share_icon">Me 2!</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="div_post_comments">
-						<ul>
-							<li>
-								<div class="div_post_info">
-									<table>
-										<th><div class="div_post_avatar"></div> </th>
-										<th>
-											<p class="div_post_comment">
-												<span class="div_post_user_name"> 
-													<a href="##">Latte art shinobi</a> 
-												</span> 
-												<span class="div_post_dream">Shall I show u the secret scroll *fake log*</span>
-											</p>
-											<div class="div_post_time">6 minutes ago</div>	
-										</th>
-									</table>
-								</div>
-							</li>
-							<li>
-								<div class="div_post_info">
-									<table>
-										<th><div class="div_post_avatar"></div> </th>
-										<th>
-											<p class="div_post_comment">
-												<span class="div_post_user_name"> 
-													<a href="##">Latte art lover</a> 
-												</span> 
-												<span class="div_post_dream">Show me some latter on, ok ^^~</span>
-											</p>
-											<div class="div_post_time">4 minutes ago</div>	
-										</th>
-									</table>
-								</div>
-							</li>
-						</ul>
-						<div class="div_write_comment">
-							<form action="#" id="write_comment">
-					    		<div class="wrapper" align="left">
-							        <input type="text" id="comment" name="comment" placeholder="Write a comment..." />
-					    		</div>
-							</form>
-						</div>
-					</div>
+					
 				</div>
 			</th>
 			<th>
@@ -224,5 +119,59 @@
 		</table>
 	</div>
 </div>
+
+<script type="text/javascript">
+	var newsfeed_Data = [];
+	var sessionID=localStorage.getItem("sessionID");
+	function getData() {
+		console.log('Session ID: ' + sessionID);
+        getNewsfeedDream(sessionID,
+            function success(data,textStatus,jqXHR){
+            	for (var i=0; i<data.message.length; i++) {
+            		obj=[];
+            		obj.dream=data.message[i];
+            		newsfeed_Data.push(obj);
+            	}
+                getUsers(data.message, 0);
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get the dream: ' + ErrorText);
+            }
+        );
+	}
+
+	function set_HeightLeftPanel() {
+		$("div.left-panel").height($("div.main-panel").height());
+	}
+
+	function getUsers(dreams_Data, i) {
+		if (i==dreams_Data.length) {
+			set_HeightLeftPanel();
+			return;
+		}
+		getUserInfo(sessionID, dreams_Data[i].user_id,
+			function success(data,textStatus,jqXHR){
+				newsfeed_Data[i].user = data.message;
+                insertDataToPage(newsfeed_Data[i]);
+                getUsers(dreams_Data, i+1);
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get the user: ' + ErrorText);
+            }
+		);
+	}
+
+	function insertDataToPage(data) {
+		data.user.avatar = "http://gravatar.com/avatar/" + hash_md5(data.user.email);
+		var dreamStatus = new EJS({url: '/templates/dreamStatus.ejs'}).render(data);
+		$("div.div_posts").append(dreamStatus);
+	}
+
+	function hash_md5(data) {
+		var hh = CryptoJS.MD5(data).toString();
+		return hh;
+	}
+</script>
+
 
 
