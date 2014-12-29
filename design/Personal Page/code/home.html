@@ -5,61 +5,31 @@
         <link rel="stylesheet" type="text/css" href="styles.css"/>
         <script src="jquery-2.1.1.js" type="text/javascript"></script>
         <script src="jquery.easing.1.3.js" type="text/javascript"></script>
-        <script>
-$ = jQuery.noConflict();
-$(document).ready(function(e) {
-    var pageWidth = $(document).width(), pageHeight = $(document).height();
-    console.log('pageW: ' + pageWidth, 'pageH: ' + pageHeight);
-
-    /* arrange elements */
-    arrangeElmts();
-    $(window).resize(function() {
-        arrangeElmts();
-    });
-
-    function arrangeElmts() {
-        var pageWidth = $(document).width(), pageHeight = $(document).height();
-        var posts = $('#userPosts');
-        var itemList = $('.postItem');
-        var totalH = 0, itemPadding = 10, margin = 50;
-
-        // align the list
-        posts.css({left: pageWidth / 4});
-
-        // align each item
-        $.each(itemList, function() {
-            var lastChild = $(this).children().last();
-            var itemH = lastChild.position().top + lastChild.last().height() - 30;
-
-            $(this).css({top: totalH});
-            $(this).height(itemH + itemPadding * 2); // 10 is padding
-            $(this).children('.postImg').width($(this).width() + itemPadding * 2);
-            console.log($(this).children('.postImg'));
-            totalH += itemH + itemPadding * 2 + margin;
-        });
-
-        posts.height(totalH);
-        
-        $('#bodyDiv').height(posts.height() + 60);
-    }
-
-});
-        </script>
+        <script src="behavior.js"></script>
     </head>
     <body>
         <div id="bodyDiv"></div>
         <div id="topBar">
             <form method="get">
-                <input id="search" type="text" placeholder="search..."/>
-            </form>
+                <input id="search" type="text" placeholder="Search..."/>
+                <button id="searchBtn" type="submit"></button>
+            </form>     
+            <li class='has-sub'><a href='#'><button id="settingBtn"></button></a>
+                <ul>
+                    <li><a id="accSetting" href='#'><span>Account</span></a></li>
+                    <div class="divider"></div>
+                    <li><a id="logout" href='#'><span>Logout</span></a></li>
+                </ul>
+            </li>
         </div>
         <div id="coverDiv"></div>
 
         <div id="userMenu">
-            <button class="userMenuItem">Post</button>
-            <button class="userMenuItem">Profile</button>
-            <button class="userMenuItem">Photo</button>
-            <button class="userMenuItem">Following</button>
+            <button id="userPost" class="userMenuItem">Post</button>
+            <button id="userProfile" class="userMenuItem">Profile</button>
+            <button id="userFollowing" class="userMenuItem">Following</button>
+            <button id="userFollower" class="userMenuItem">Follower</button>
+            <button id="followBtn">Follow</button>
         </div>
         <div id="avatarDiv"></div>
         <div id="userPosts">
@@ -71,12 +41,33 @@ $(document).ready(function(e) {
                 </div>
 
                 <div class="postImg"></div>
-                <div class="postContent">I dream a dream about something</div>
+                <div class="postContent">I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something</div>
                 <div class="postStat">
-                    <span><a>120</a><img class="likeImg"/></span>
-                    <span><a>10</a><img class="cmtImg"/></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn1" class="likeBtn"></button></span>
+                    <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                <div class="divider2"></div>
+                <div class="commentList">
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>
+                            Good one!
+                        </div>
+                    </div>
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>Congratulation dude nice job hahah :D HUEHUEHUEHUEHUEHUEHUEHUEHUEHUE Good night keep calm and sleep zzZ</div>
+                    </div>
+                </div>
+                <div class="commentForm">
+                    <form method="post">
+                        <div class="userCmtAvatar"></div>
+                        <textarea rows="1" placeholder="your comment..."></textarea>
+                        <button id="sendCmt1" class="sendCmt" type="submit">Send</button>
+                    </form>
+                </div>
             </div>
             <div id="post2" class="postItem">
                 <div class="userImg"></div>
@@ -89,10 +80,25 @@ $(document).ready(function(e) {
                     <a href="google.com">#bestdreamever</a>
                 </div>
                 <div class="postStat">
-                    <span><a>120</a><img class="likeImg"/></span>
-                    <span><a>10</a><img class="cmtImg"/></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn2" class="likeBtn"></button></span>
+                    <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                <div class="divider2"></div>
+                <div class="commentList">
+                    <div class="commentItem">
+                        <div class="cmtAvatar"></div>
+                        <div class="cmtContent">
+                            <div class="cmtPoster">To Huu Quan</div>g9 my love. We'll meet tomorrow I hope ^_^</div>
+                    </div>
+                </div>
+                <div class="commentForm">
+                    <form method="post">
+                        <div class="userCmtAvatar"></div>
+                        <textarea rows="1" placeholder="your comment..."></textarea>
+                        <button id="sendCmt2" type="submit">Send</button>
+                    </form>
+                </div>
+                <!--                <button class="expandBtn">View full story</button>-->
             </div>
             <div id="post3" class="postItem">
                 <div class="userImg"></div>
@@ -105,11 +111,19 @@ $(document).ready(function(e) {
                     <a href="google.com">#crazyboy</a><a href="google.com">#relax</a><a href="google.com">#maniko</a>
                 </div>
                 <div class="postStat">
-                    <span><a>120</a><img class="likeImg"/></span>
-                    <span><a>10</a><img class="cmtImg"/></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn3" class="likeBtn"></button></span>
+                    <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
-                <button class="expandBtn">View full story</button>
+                <div class="commentForm">
+                    <form method="post">
+                        <div class="userCmtAvatar"></div>
+                        <textarea rows="1" placeholder="your comment..."></textarea>
+                        <button id="sendCmt3" type="submit">Send</button>
+                    </form>
+                </div>
             </div>
         </div>
+
+        <a id="toTop" href="#top"><img/></a>
     </body>
 </html>
