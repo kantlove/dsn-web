@@ -171,7 +171,6 @@
 	}
 
 	function getUserComment(dreams_Data, x, comments, i) {
-		console.log("user");
 		if (i==comments.length) {
 			getComments(dreams_Data, x+1);	
 			return;
@@ -189,7 +188,6 @@
 	}
 
 	function getComments(dreams_Data, i) {
-		console.log("comment");
 		if (i==dreams_Data.length) {
 			insertDataToPage(newsfeed_Data, 0);
 			return;
@@ -213,6 +211,7 @@
 			setTimeout(function() {
 				$("div.left-panel").height($("div.main-panel").height());
 			}, 50);
+			console.log(newsfeed_Data);
 			return;
 		}
 		data[i].user.avatar = "http://gravatar.com/avatar/" + hash_md5(data[i].user.email);
@@ -236,7 +235,6 @@
 		
 		postDream(sessionID, text,
 			function success(data, textStatus, jqXHR) {
-				console.log('Data: ' + data);
 				el.style.visibility = (el.style.visibility == "visible") ? "collapse" : "visible";
 				location.reload();
 			},
