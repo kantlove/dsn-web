@@ -11,7 +11,7 @@
 <div class="header"> 
 	<!-- <button id="testBtn" onclick="getDreams()">Get dream</button> -->
 	<div class="div_logout">
-		<a href="#"><img src="/images/Logout.png"></a>
+		<a href="#" onclick="logoutBtnClick()"><img src="/images/Logout.png"></a>
 	</div>
 	<div class="div_search">
 		<form action="#" id="search_box">
@@ -243,6 +243,14 @@
 			}
 		)
 	}
+
+	function logoutBtnClick(){
+        window.location='/';
+        if (localStorage.getItem("remindMe")==0){
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+        }
+    }
 
 	function cancelDreamBtnClick() {
 		$('#dimBg').css({visibility: 'collapse'});
