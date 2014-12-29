@@ -1,11 +1,4 @@
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-<script type="text/javascript" src="/js/ejs_production.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
-<script src="/js/DreamHelper.js"></script>
-
-<div class="div_post">
+<div class="div_post" id="<%= dream.id %>">
 	<div class="div_post_info">
 		<table>
 			<th>
@@ -42,7 +35,9 @@
 		<ul>
 			<li>
 				<div class="num_likes"> <%= dream.num_likes %> </div>
-				<div class="like_icon"><img src="/images/heart.png" onmouseover="this.src='/images/heart-hover.png'" onmouseout="this.src='/images/heart.png'"/></div>
+				<div class="like_icon" onclick="like_Dream_Click(this);">
+					<img src="/images/heart.png" onmouseover="this.src='/images/heart-hover.png'" onmouseout="this.src='/images/heart.png'"/>
+				</div>
 			</li>
 			<li>
 				<div class="num_comments"> <%= dream.num_cmts %> </div>
@@ -66,7 +61,7 @@
 								</div> 
 							</th>
 							<th>
-								<p class="div_post_comment">
+								<p class="div_post_comment"s>
 									<span class="div_post_user_name"> 
 										<a href="##"> <%= comments[i].user.fullname %> </a> 
 									</span> 
@@ -83,7 +78,7 @@
 			<form action="#" id="write_comment">
 	    		<div class="wrapper" align="left">
 			        <input type="text" id="comment" name="comment" placeholder="Write a comment..." />
-			        <button type="button" id="postCmtBtn" name="comment" onclick="postBtnClick()">Post</button>
+			        <button type="button" id="postCmtBtn" name="comment" onclick="postBtnClick(this)">Post</button>
 	    		</div>
 			</form>
 		</div>
@@ -92,8 +87,49 @@
 
 <script type="text/javascript">
 	var sessionID=localStorage.getItem("sessionID");
-	function postBtnClick() {
-		var text = document.getElementById("comment").value;
-		console.log("Comment text: " + text);
+	function postBtnClick(element) {
+		var dreamID = $(element).closest("div.div_post").attr("id");
+		var text = $(element).prev().val();
+		commentDream(sessionID, dreamID, text, 
+			function success(data, textStatus, jqXHR) {
+				console.log("comment success");
+				location.reload();
+			},
+			function error(xhRequest, ErrorText, thrownError) {
+				console.log('Error posting dream: ' + ErrorText);
+			}
+		);
+	}
+
+	function like_Dream_Click(element) {
+		var dreamID = $(element).closest("div.div_post").attr("id");
+		var image = $(element).children()[0];
+		if ($(image).attr("onmouseout")) {
+			$(element).prev()[0].innerText = parseInt($(element).prev()[0].innerText)+1;
+			$(image).removeAttr("onmouseout");
+			likeDream(sessionID, dreamID, 
+				function success(data, textStatus, jqXHR) {
+					console.log("like success");
+				},
+				function error(xhRequest, ErrorText, thrownError) {
+					console.log('Error posting dream: ' + ErrorText);
+				}
+			);
+		}
+		else {
+			$(element).prev()[0].innerText = parseInt($(element).prev()[0].innerText)-1;
+			$(image).attr("onmouseout", "this.src='/images/heart.png'");
+			removeLikeDream(sessionID, dreamID, 
+				function success(data, textStatus, jqXHR) {
+					console.log("remove like success");
+				},
+				function error(xhRequest, ErrorText, thrownError) {
+					console.log('Error posting dream: ' + ErrorText);
+				}
+			);
+		}
+		
 	}
 </script>
+
+
