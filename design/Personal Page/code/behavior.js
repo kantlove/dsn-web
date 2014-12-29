@@ -8,7 +8,7 @@ $(document).ready(function(e) {
     $(window).resize(function() {
         arrangeElmts();
     });
-    
+
     // button scroll to top
     $("a[href='#top']").click(function() {
         $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -37,21 +37,21 @@ $(document).ready(function(e) {
     $('button#userFollower').click(function() {
         console.log('user follower click!'); 
     });
-    
+
     //------------------------
     // Search buttons
     //------------------------
     // search button
     $('button#searchBtn').click(function(e) {
         console.log('search btn click!'); 
-        
+
         var text = $('input#search').text();
         $('input#search').text('aaaa');  
-        
+
         // prevent the page from scrolling to top
         e.preventDefault();
     });
-    
+
     //------------------------
     // Send comment buttons
     //------------------------
@@ -61,10 +61,10 @@ $(document).ready(function(e) {
         var id = $(this).attr('id');
         // get content of the comment to post
         var text = $(this).siblings('textarea').text();
-        
+
         console.log(text, 'send comment for post ' + id.slice(-1)); 
     });
-    
+
     //------------------------
     // Like buttons
     //------------------------
@@ -72,33 +72,65 @@ $(document).ready(function(e) {
     $('button.likeBtn').click(function() {
         // get id to identify which post
         var id = $(this).attr('id');
-        
+
         console.log('like button on post ' + id.slice(-1));
     });
-    
+
     //------------------------
     // Setting buttons
     //------------------------
     // setting btn click(button on top right corner)
     $('button#settingBtn').click(function(e) {
         console.log('setting open!');
-        
+
         // prevent the page from scrolling to top
         e.preventDefault();
     });
-    
+
     // account setting btn
     $('a#accSetting').click(function(e) {
-       console.log('account setting click!'); 
+        console.log('account setting click!'); 
         // prevent the page from scrolling to top
         e.preventDefault();
     });
-    
+
     // log out
     $('a#logout').click(function(e) {
-       console.log('log out!'); 
-        
+        console.log('log out!'); 
+
         // prevent the page from scrolling to top
+        e.preventDefault();
+    });
+
+    //------------------------
+    // New post buttons
+    //------------------------
+    // open new post editor btn
+    $('button#newPostBtn').click(function(e) {
+        console.log('open new post editor!');
+        $('#dimBg').css({visibility: 'visible'});
+        blockScrolling();
+    });
+
+    // post a new post
+    $('button#postNewPost').click(function(e) {
+        console.log('post a new post');
+        var text = $(this).siblings('textarea').text();
+
+
+        // hide the editor
+        $('#dimBg').css({visibility: 'collapse'});
+        restoreScrolling();
+        e.preventDefault();
+    });
+
+    // cancel a new post
+    $('button#cancelNewPost').click(function(e) {
+        console.log('cancel!');
+
+        // hide the editor
+        $('#dimBg').css({visibility: 'collapse'});
+        restoreScrolling();
         e.preventDefault();
     });
 
@@ -149,6 +181,24 @@ $(document).ready(function(e) {
         posts.height(totalH);
 
         $('#bodyDiv').height(posts.height() + 60);
+        
+//        $('#newPostDiv').css({
+//            top: pageHeight / 2 - $('#dimBg').height() / 2,
+//            left: pageWidth / 2 - $('#dimBg').width() / 2
+//        });
     }
 
+    function blockScrolling() {
+        $('html, body').css({
+            'overflow': 'hidden',
+            'height': '100%'
+        });
+    }
+
+    function restoreScrolling() {
+        $('html, body').css({
+            'overflow': 'scroll',
+            'height': 'auto'
+        });
+    }
 });

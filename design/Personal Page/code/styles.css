@@ -127,6 +127,20 @@ li.has-sub > ul > li > a{
     text-decoration: none;
 }
 
+button#newPostBtn {
+    position: absolute;
+    right: 90px;
+    top: 5px;
+    height: 30px;
+    width: 30px;
+    background-image: url(edit.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+}
+
 div.divider {
     position: relative;
     left: -25px;
@@ -478,6 +492,62 @@ ul.achmtList > li:hover {
     background-color: #3b3b3b;
 }
 
+div#dimBg {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.34);
+    z-index: 98;
+    visibility: collapse;
+}
 
+div#newPostDiv {
+    position: fixed;
+    top: 250px;
+    left: 350px;
+    width: 500px;
+    height: 160px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 99;
+    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.19); 
+}
 
+div#newPostDiv textarea{
+    width: 455px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px 10px 0 10px;
+}
 
+div#newPostDiv textarea::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+}
+
+button#postNewPost {
+    position: absolute;
+    bottom: 10px;
+    right: 113px;
+    height: 30px;
+    width: 80px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+}
+
+button#cancelNewPost {
+    position: absolute;
+    bottom: 10px;
+    right: 23px;
+    height: 30px;
+    width: 80px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #393939;
+}
