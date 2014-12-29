@@ -8,13 +8,87 @@ $(document).ready(function(e) {
     $(window).resize(function() {
         arrangeElmts();
     });
-
+    
     // button scroll to top
     $("a[href='#top']").click(function() {
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
     });
 
+    //-------------------
+    // User menu buttons
+    //-------------------
+    // user post
+    $("button#userPost").click(function() {
+        console.log('user post click!'); 
+    });
+
+    // user profile
+    $("button#userProfile").click(function() {
+        console.log('user profile click!'); 
+    });
+
+    // following list
+    $('button#userFollowing').click(function() {
+        console.log('user following click!');
+    });
+
+    // follower list
+    $('button#userFollower').click(function() {
+        console.log('user follower click!'); 
+    });
+    
+    //-------------------
+    // Search buttons
+    //-------------------
+    // search button
+    $('button#searchBtn').click(function() {
+        console.log('search btn click!'); 
+        
+        var text = $('input#search').text();
+        $('input#search').text('aaaa');       
+    });
+    
+    //-------------------
+    // Send comment buttons
+    //-------------------
+    // send comment
+    $('button.sendCmt').click(function() {
+        // get id to identify which post
+        var id = $(this).attr('id');
+        // get content of the comment to post
+        var text = $(this).siblings('textarea').text();
+        
+        console.log(text, 'send comment for post ' + id.slice(-1)); 
+    });
+    
+    //-------------------
+    // Like buttons
+    //-------------------
+    // like button on each post
+    $('button.likeBtn').click(function() {
+        // get id to identify which post
+        var id = $(this).attr('id');
+        
+        console.log('like button on post ' + id.slice(-1));
+    });
+    
+    //-------------------
+    // Setting buttons
+    //-------------------
+    // account setting btn
+    $('a#accSetting').click(function() {
+       console.log('account setting click!'); 
+    });
+    
+    // log out
+    $('a#logout').click(function() {
+       console.log('log out!'); 
+    });
+
+    //-------------------
+    // Functions
+    //-------------------
     function arrangeElmts() {
         var pageWidth = $(document).width(), pageHeight = $(document).height();
         var posts = $('#userPosts');

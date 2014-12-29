@@ -16,19 +16,19 @@
             </form>     
             <li class='has-sub'><a href='#'><button id="settingBtn"></button></a>
                 <ul>
-                    <li><a href='#'><span>Account</span></a></li>
+                    <li><a id="accSetting" href='#'><span>Account</span></a></li>
                     <div class="divider"></div>
-                    <li><a href='#'><span>Logout</span></a></li>
+                    <li><a id="logout" href='#'><span>Logout</span></a></li>
                 </ul>
             </li>
         </div>
         <div id="coverDiv"></div>
 
         <div id="userMenu">
-            <button class="userMenuItem">Post</button>
-            <button class="userMenuItem">Profile</button>
-            <button class="userMenuItem">Photo</button>
-            <button class="userMenuItem">Following</button>
+            <button id="userPost" class="userMenuItem">Post</button>
+            <button id="userProfile" class="userMenuItem">Profile</button>
+            <button id="userFollowing" class="userMenuItem">Following</button>
+            <button id="userFollower" class="userMenuItem">Follower</button>
             <button id="followBtn">Follow</button>
         </div>
         <div id="avatarDiv"></div>
@@ -43,7 +43,7 @@
                 <div class="postImg"></div>
                 <div class="postContent">I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something I dream a dream about something</div>
                 <div class="postStat">
-                    <span class="likeSpan"><a>120</a><button class="likeBtn"></button></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn1" class="likeBtn"></button></span>
                     <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
                 <div class="divider2"></div>
@@ -65,7 +65,7 @@
                     <form method="post">
                         <div class="userCmtAvatar"></div>
                         <textarea rows="1" placeholder="your comment..."></textarea>
-                        <button type="submit">Send</button>
+                        <button id="sendCmt1" class="sendCmt" type="submit">Send</button>
                     </form>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     <a href="google.com">#bestdreamever</a>
                 </div>
                 <div class="postStat">
-                    <span class="likeSpan"><a>120</a><button class="likeBtn"></button></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn2" class="likeBtn"></button></span>
                     <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
                 <div class="divider2"></div>
@@ -95,7 +95,7 @@
                     <form method="post">
                         <div class="userCmtAvatar"></div>
                         <textarea rows="1" placeholder="your comment..."></textarea>
-                        <button type="submit">Send</button>
+                        <button id="sendCmt2" type="submit">Send</button>
                     </form>
                 </div>
                 <!--                <button class="expandBtn">View full story</button>-->
@@ -111,14 +111,14 @@
                     <a href="google.com">#crazyboy</a><a href="google.com">#relax</a><a href="google.com">#maniko</a>
                 </div>
                 <div class="postStat">
-                    <span class="likeSpan"><a>120</a><button class="likeBtn"></button></span>
+                    <span class="likeSpan"><a>120</a><button id="likeBtn3" class="likeBtn"></button></span>
                     <span class="commentSpan"><a>10</a><img class="cmtImg"/></span>
                 </div>
                 <div class="commentForm">
                     <form method="post">
                         <div class="userCmtAvatar"></div>
                         <textarea rows="1" placeholder="your comment..."></textarea>
-                        <button type="submit">Send</button>
+                        <button id="sendCmt3" type="submit">Send</button>
                     </form>
                 </div>
             </div>
