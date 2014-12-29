@@ -1,5 +1,5 @@
 function getUserInfo(sessionID, userId, callbackSuccess, callbackError) {
-		$.ajax({
+	$.ajax({
 		type: "GET",
 		url: "http://dreamyday.tk:80/user?session_id=" + sessionID + "&user_id=" + userId,
 		success: function(data, textStatus, jqXHR){

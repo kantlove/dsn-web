@@ -140,19 +140,14 @@
         );
 	}
 
-	function set_HeightLeftPanel() {
-		$("div.left-panel").height($("div.main-panel").height());
-	}
-
 	function getUsers(dreams_Data, i) {
 		if (i==dreams_Data.length) {
-			set_HeightLeftPanel();
+            getComments(dreams_Data, 0);
 			return;
 		}
 		getUserInfo(sessionID, dreams_Data[i].user_id,
 			function success(data,textStatus,jqXHR){
 				newsfeed_Data[i].user = data.message;
-                insertDataToPage(newsfeed_Data[i]);
                 getUsers(dreams_Data, i+1);
         	},
             function error(xhRequest, ErrorText, thrownError){
@@ -161,10 +156,54 @@
 		);
 	}
 
-	function insertDataToPage(data) {
-		data.user.avatar = "http://gravatar.com/avatar/" + hash_md5(data.user.email);
-		var dreamStatus = new EJS({url: '/templates/dreamStatus.ejs'}).render(data);
-		$("div.div_posts").append(dreamStatus);
+	function getUserComment(dreams_Data, x, comments, i) {
+		console.log("user");
+		if (i==comments.length) {
+			getComments(dreams_Data, x+1);	
+			return;
+		}
+		getUserInfo(sessionID, comments[i].user_id,
+			function success(data,textStatus,jqXHR){
+				comments[i].user = data.message;
+				comments[i].user.avatar = "http://gravatar.com/avatar/" + hash_md5(comments[i].user.email);
+                getUserComment(dreams_Data, x, comments, i+1);
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get the user: ' + ErrorText);
+            }
+		);
+	}
+
+	function getComments(dreams_Data, i) {
+		console.log("comment");
+		if (i==dreams_Data.length) {
+			insertDataToPage(newsfeed_Data, 0);
+			return;
+		}
+		getDream(sessionID, dreams_Data[i].id,
+			function success(data,textStatus,jqXHR){
+				newsfeed_Data[i].comments = data.message.comments;
+				getUserComment(dreams_Data, i, newsfeed_Data[i].comments, 0);
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get comments: ' + ErrorText);
+            }
+		);
+	}
+
+	var dreamStatus = "";
+
+	function insertDataToPage(data, i) {
+		if (i==data.length) {
+			$("div.div_posts").append(dreamStatus);
+			setTimeout(function() {
+				$("div.left-panel").height($("div.main-panel").height());
+			}, 50);
+			return;
+		}
+		data[i].user.avatar = "http://gravatar.com/avatar/" + hash_md5(data[i].user.email);
+		dreamStatus += new EJS({url: '/templates/dreamStatus.ejs'}).render(data[i]);
+		insertDataToPage(data, i+1);
 	}
 
 	function hash_md5(data) {

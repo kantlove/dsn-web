@@ -5,7 +5,6 @@ function postDream(sessionID, text, callbackSuccess, callbackError) {
 		data: {
 			session_id: sessionID,
 			text: text
-
 		},
 		success: function(data, textStatus, jqXHR){
 			// Check if callbackSuccess is a function
@@ -29,7 +28,7 @@ function getDream(sessionID,dreamID,callbackSuccess,callbackError) {
 
 	$.ajax({
 		type: "GET",
-		url: "http://dreamyday.tk:80/dream?sessionId="+sessionID+"&dreamId="+dreamID,
+		url: "http://dreamyday.tk:80/dream?session_id="+sessionID+"&dream_id="+dreamID,
 		success: function (data,textStatus,jqXHR){
 			if (typeof(callbackSuccess) == "function") {
 				callbackSuccess(data, textStatus, jqXHR);
