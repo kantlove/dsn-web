@@ -1,3 +1,10 @@
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script type="text/javascript" src="/js/ejs_production.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script src="/js/DreamHelper.js"></script>
+
 <div class="div_post">
 	<div class="div_post_info">
 		<table>
@@ -76,8 +83,17 @@
 			<form action="#" id="write_comment">
 	    		<div class="wrapper" align="left">
 			        <input type="text" id="comment" name="comment" placeholder="Write a comment..." />
+			        <button type="button" id="postCmtBtn" name="comment" onclick="postBtnClick()">Post</button>
 	    		</div>
 			</form>
 		</div>
 	</div>
-	</div>
+</div>
+
+<script type="text/javascript">
+	var sessionID=localStorage.getItem("sessionID");
+	function postBtnClick() {
+		var text = document.getElementById("comment").value;
+		console.log("Comment text: " + text);
+	}
+</script>
