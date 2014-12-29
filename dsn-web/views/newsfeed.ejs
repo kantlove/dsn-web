@@ -122,11 +122,14 @@
 		</table>
 	</div>
 
-	<div id="overlay">
-	     <div>
-	     		<!-- Design posting dream here -->
-	          <input type="text" id="dreamInput" name="dreamInput" placeholder="Write a dream..." />
-			  <button type="button" id="postDreamBtn" name="dreamBtn" onclick="postDreamBtnClick()">Post</button>
+	<div id="dimBg">
+	     <div id="newPostDiv">
+	   			<!-- Design posting dream here -->
+		      <div method="post">
+		            <textarea id="newContent" placeholder="write a new post..."></textarea>
+		            <button id="postNewPost" onclick="postDreamBtnClick()">Post</button>
+		            <button id="cancelNewPost" onclick="cancelDreamBtnClick()">Cancel</button>
+		      </div>
 	     </div>
 	</div>
 </div>
@@ -184,23 +187,29 @@
 	}
 
 	function showPostDialog() {
-		var el = document.getElementById("overlay");
-		el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		$('#dimBg').css({visibility: 'visible'});
+        //blockScrolling();
 	}
 
 	function postDreamBtnClick() {
-		var text = document.getElementById("dreamInput").value;
-		var el = document.getElementById("overlay");
+		var text = document.getElementById("newContent").value;
+		var el = document.getElementById("dimBg");
 		
 		postDream(sessionID, text,
 			function success(data, textStatus, jqXHR) {
 				console.log('Data: ' + data);
-				el.style.visibility = (el.style.visibility == "hidden") ? "visible" : "hidden";
+				el.style.visibility = (el.style.visibility == "visible") ? "collapse" : "visible";
+				location.reload();
 			},
 			function error(xhRequest, ErrorText, thrownError) {
 				console.log('Error posting dream: ' + ErrorText);
 			}
 		)
+	}
+
+	function cancelDreamBtnClick() {
+		$('#dimBg').css({visibility: 'collapse'});
+        //restoreScrolling();
 	}
 </script>
 
