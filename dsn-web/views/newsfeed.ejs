@@ -1,10 +1,5 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/> 
-<script type="text/javascript" src="/js/ejs_production.js"></script>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-
 
 <div class="header"> 
 	<!-- <button id="testBtn" onclick="getDreams()">Get dream</button> -->
@@ -16,16 +11,16 @@
     		<div class="wrapper">
 		        <input type="text" id="search" name="search" placeholder="Search..." />
 		        <button type="submit" class="search_btn">
-		        	<img id="icon_search" src="/images/search_icon.png" title="Search" />
+		        	<img id="icon_search" src="/images/magnifier.png" title="Search" />
 		        </button>
     		</div>
 		</form>
 	</div>
 	<div class="div_setting">
-		<a href="#"><img src="/images/SettingIcon.png"></a>
+		<a href="#"><img src="/images/gear.png"></a>
 	</div>
 	<div class="div_new_post">
-		<a href="#" id="newPost" onclick="showPostDialog()"><img src="/images/NewPostIcon.png"></a>
+		<a href="#" id="newPost" onclick="showPostDialog()"><img src="/images/edit.png"></a>
 	</div>
 </div>
 
@@ -159,6 +154,10 @@
         );
 	}
 
+	$(document).ready(function() {
+		getData();
+	});
+
 	function insertUserToPage(data) {
 		data.user.avatar = "http://gravatar.com/avatar/" + hash_md5(data.user.email);
 		var info = new EJS({url: '/templates/userInfo.ejs'}).render(data);
@@ -268,11 +267,4 @@
 		$('#dimBg').css({visibility: 'collapse'});
         //restoreScrolling();
 	}
-
-	$(document).ready(function() {
-		getData();
-	}); 
 </script>
-
-
-
