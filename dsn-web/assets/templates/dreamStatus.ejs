@@ -77,8 +77,7 @@
 		<div class="div_write_comment">
 			<form action="#" id="write_comment">
 	    		<div class="wrapper" align="left">
-			        <input type="text" id="comment" name="comment" placeholder="Write a comment..." />
-			        <button type="button" id="postCmtBtn" name="comment" onclick="postBtnClick(this)">Post</button>
+			        <input type="text" id="comment" name="comment" onkeypress="return runScript(event, this)" placeholder="Write a comment..." />
 	    		</div>
 			</form>
 		</div>
@@ -87,18 +86,22 @@
 
 <script type="text/javascript">
 	var sessionID=localStorage.getItem("sessionID");
-	function postBtnClick(element) {
-		var dreamID = $(element).closest("div.div_post").attr("id");
-		var text = $(element).prev().val();
-		commentDream(sessionID, dreamID, text, 
-			function success(data, textStatus, jqXHR) {
-				console.log("comment success");
-				location.reload();
-			},
-			function error(xhRequest, ErrorText, thrownError) {
-				console.log('Error posting dream: ' + ErrorText);
-			}
-		);
+
+	function runScript(e, element) {
+	    if (e.keyCode == 13) {
+	        var dreamID = $(element).closest("div.div_post").attr("id");
+			var text = $(element).val();
+			commentDream(sessionID, dreamID, text, 
+				function success(data, textStatus, jqXHR) {
+					console.log("comment success");
+					location.reload();
+				},
+				function error(xhRequest, ErrorText, thrownError) {
+					console.log('Error posting dream: ' + ErrorText);
+				}
+			);
+	        return true;
+	    }
 	}
 
 	function like_Dream_Click(element) {
