@@ -75,11 +75,11 @@
 			<% } %>
 		</ul>
 		<div class="div_write_comment">
-			<form action="#" id="write_comment">
+			<div id="write_comment">
 	    		<div class="wrapper" align="left">
 			        <input type="text" id="comment" name="comment" onkeypress="return runScript(event, this)" placeholder="Write a comment..." />
 	    		</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -100,7 +100,7 @@
 					console.log('Error posting dream: ' + ErrorText);
 				}
 			);
-	        return true;
+			return true;
 	    }
 	}
 
