@@ -115,6 +115,11 @@ div.header img {
     left: 30px;
 }
 
+.div_avatar > img {
+    width: 100px;
+    height: 100px;
+}
+
 .div_name {
     position: absolute;
     left: 150px;

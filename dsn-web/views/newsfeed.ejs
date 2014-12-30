@@ -1,12 +1,9 @@
-<!--
-<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
--->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/> 
 <script type="text/javascript" src="/js/ejs_production.js"></script>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+
 
 <div class="header"> 
 	<!-- <button id="testBtn" onclick="getDreams()">Get dream</button> -->
@@ -34,18 +31,7 @@
 <div class="main">
 	<div class="left-panel">
 		<div class="div_info">
-			<div class="div_avatar"> </div>	
-			<div class="div_name"> <a href="#">Anh Nguyen</a></div>
-			<div class="bottom_line"></div>
-			<div class="div_dream" id="dream">
-				<img id="icon_dream" src="/images/shape2.png">
-				<div class="div_dream_number">23</div>
-			</div>
-
-			<div class="div_dream" id="archivement">
-				<img id="icon_dream" src="/images/shape1.png">
-				<div class="div_dream_number">323</div>
-			</div>
+			
 		</div>
 		<div class="div_following">Following
 			<div class="div_followers">
@@ -139,6 +125,23 @@
 	var sessionID=localStorage.getItem("sessionID");
 	function getData() {
 		console.log('Session ID: ' + sessionID);
+		getSessionInfo(sessionID, 
+			function success(data,textStatus,jqXHR){
+				newsfeed_Data.account = data.message;
+				getUserInfo(sessionID, newsfeed_Data.account.user_id,
+					function success(data,textStatus,jqXHR){
+						newsfeed_Data.user = data.message;
+						console.log(newsfeed_Data);
+						insertUserToPage(newsfeed_Data);
+		        	},
+		            function error(xhRequest, ErrorText, thrownError){
+		                console.log('Cannot get the user: ' + ErrorText);
+		            }
+				);
+        	},
+            function error(xhRequest, ErrorText, thrownError){
+                console.log('Cannot get the dream: ' + ErrorText);
+		});
         getNewsfeedDream(sessionID,
             function success(data,textStatus,jqXHR){
             	for (var i=0; i<data.message.length; i++) {
@@ -152,6 +155,12 @@
                 console.log('Cannot get the dream: ' + ErrorText);
             }
         );
+	}
+
+	function insertUserToPage(data) {
+		data.user.avatar = "http://gravatar.com/avatar/" + hash_md5(data.user.email);
+		var info = new EJS({url: '/templates/userInfo.ejs'}).render(data);
+		$("div.div_info").append(info);
 	}
 
 	function getUsers(dreams_Data, i) {
