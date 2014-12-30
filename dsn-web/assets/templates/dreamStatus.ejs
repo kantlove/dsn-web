@@ -74,12 +74,13 @@
 				</li>
 			<% } %>
 		</ul>
+
 		<div class="div_write_comment">
-			<form action="#" id="write_comment">
+			<div id="write_comment">
 	    		<div class="wrapper" align="left">
 			        <input type="text" id="comment" name="comment" onkeypress="return runScript(event, this)" placeholder="Write a comment..." />
 	    		</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -94,7 +95,17 @@
 			commentDream(sessionID, dreamID, text, 
 				function success(data, textStatus, jqXHR) {
 					console.log("comment success");
-					location.reload();
+					var myData = data.message;
+					getUserInfo(sessionID, myData.user_id,
+						function success(data,textStatus,jqXHR){
+							myData.user = data.message;
+							add_Comments(myData, dreamID);
+							$(element).val("");
+			        	},
+			            function error(xhRequest, ErrorText, thrownError){
+			                console.log('Cannot get the user: ' + ErrorText);
+			            }
+					);
 				},
 				function error(xhRequest, ErrorText, thrownError) {
 					console.log('Error posting dream: ' + ErrorText);
@@ -102,6 +113,14 @@
 			);
 	        return true;
 	    }
+	}
+
+	function add_Comments(data, id) {
+		data.user.avatar = "http://gravatar.com/avatar/" + hash_md5(data.user.email);
+		console.log(data);
+		var info = new EJS({url: '/templates/comment.ejs'}).render(data);
+		$($("#"+id).find("div.div_write_comment")).before(info);
+		console.log("sida");
 	}
 
 	function like_Dream_Click(element) {
@@ -132,6 +151,11 @@
 			);
 		}
 		
+	}
+
+	function hash_md5(data) {
+		var hh = CryptoJS.MD5(data).toString();
+		return hh;
 	}
 </script>
 
