@@ -1,4 +1,5 @@
 <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 
 <div class="header"> 
 	<!-- <button id="testBtn" onclick="getDreams()">Get dream</button> -->
@@ -118,6 +119,7 @@
 <script type="text/javascript">
 	var newsfeed_Data = [];
 	var sessionID=localStorage.getItem("sessionID");
+
 	function getData() {
 		console.log('Session ID: ' + sessionID);
 		getSessionInfo(sessionID, 
@@ -187,6 +189,7 @@
 			function success(data,textStatus,jqXHR){
 				comments[i].user = data.message;
 				comments[i].user.avatar = "http://gravatar.com/avatar/" + hash_md5(comments[i].user.email);
+				comments[i].created_at = moment(comments[i].created_at).fromNow();
                 getUserComment(dreams_Data, x, comments, i+1);
         	},
             function error(xhRequest, ErrorText, thrownError){
@@ -223,6 +226,7 @@
 			return;
 		}
 		data[i].user.avatar = "http://gravatar.com/avatar/" + hash_md5(data[i].user.email);
+		data[i].dream.time_post = moment(data[i].dream.created_at).fromNow();
 		dreamStatus += new EJS({url: '/templates/dreamStatus.ejs'}).render(data[i]);
 		insertDataToPage(data, i+1);
 	}
