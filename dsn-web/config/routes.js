@@ -33,12 +33,26 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'home'
   },
 
+  '/signinprocess' :'SigninController.processSignin',
+
+  '/signup' : {
+    view: 'signup'
+  },
+  '/signin' : {
+    view: 'signin'
+  },
+  '/mainpage':{
+    view:'mainpage'
+  },
   '/newsfeed': {
     view: 'newsfeed'
   }
+
+
+  
 
   /***************************************************************************
   *                                                                          *

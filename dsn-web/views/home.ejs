@@ -1,0 +1,131 @@
+
+<script>
+    $ = jQuery.noConflict();
+    $(document).ready(function(e) {
+        var pageWidth = $(document).width(), pageHeight = $(document).height();
+        console.log('pageW: ' + pageWidth, 'pageH: ' + pageHeight);
+
+        /* arrange elements */
+        arrangeElmts();
+        $(window).resize(function() {
+            arrangeElmts();
+        });
+
+        $('input.userInfo').mouseup(function() {
+            $('input.userInfo').css({'borderColor': 'lightGray'});
+            $(this).css({'border-color': 'black'});
+        });
+
+        function arrangeElmts() {
+            var textDiv = $('div#textDiv'), formDiv = $('div#formDiv'),
+                topBar = $('div#topBar'), bgDiv = $('div#bgDiv'),
+                dreamDiv = $('div#dreamDiv');
+
+            var pageWidth = $(document).width(), pageHeight = $(document).height();
+
+            formDiv.css({'left': pageWidth / 4 * 2.5});
+
+            textDiv
+            .width(formDiv.position().left - 20)
+            .css({'top': formDiv.position().top - 40});
+
+            dreamDiv
+            .width(formDiv.position().left - 50)
+            .css({'top': textDiv.position().top +  textDiv.height()});
+
+            console.log(topBar.height(), bgDiv.height());
+        }
+
+        /* infinitely changing background image */
+        var bgDiv = $('div#bgDiv');
+    });
+</script>
+<div id="topBar"><p>Dreamy Day</p></div>
+<div id="bgDiv"></div>
+<div id="formDiv">
+    <div id="signinDiv">
+        <div id="formSignin">
+            <div>
+                <input id="username" class="userInfo" type="text" placeholder="Username"/>
+            </div>
+            <div>
+                <input id="password" class="userInfo" type="password" placeholder="Password"/>
+            </div>
+            <div>
+                <input id="remember" type="checkbox"/> Remember me
+            </div>
+            <div id="buttonDiv"><button id="signinBtn" onclick="signInButton()">Sign in</button></div>
+        </div>    
+    </div>
+    <div id="signupDiv">
+        <p>New dreamer? Sign up here</p>
+        <div id="formSignup">
+            <div>
+                <input id="email" class="userInfo" type="text" placeholder="Email"/>
+            </div>
+            <div>
+                <input id="fullname_reg" class="userInfo" type="text" placeholder="Fullname"/>
+            </div>
+            <div>
+                <input id="username_reg" class="userInfo" type="text" placeholder="Username"/>
+            </div>
+            <div>
+                <input id="password_reg" class="userInfo" type="password" placeholder="Password"/>
+            </div>
+            <div id="buttonDiv_reg"><button id="signupBtn" onclick="signUpButton()">Register</button></div>
+        </div>
+    </div>
+</div>
+<div id="textDiv"><h1>Welcome to <b>Dreamy Day</b></h1></div>
+<div id="dreamDiv">My dream is to be happy with what I’m doing. I don’t know what I want to do, I just want to be happy doing it. <i>- by <b>Carl Johnson</b></i></div>
+
+<script>
+    function signInButton(){
+        var username = $('#username');
+        var password = $('#password');
+        console.log(username.val() + " " + password.val());
+        signin(username.val(),password.val(),
+            function sucessSignin(data, textStatus, jqXHR){
+                            localStorage.setItem("sessionID",data.message.id);
+                            localStorage.setItem("userId",data.message.user_id);
+                            localStorage.setItem("username",username.val());
+                            localStorage.setItem("password",password.val());
+                            console.log(data.message.id);
+                            if (document.getElementById("remember").checked==true){
+                                localStorage.setItem("remindMe",1);
+                            }
+                            else {
+                                localStorage.setItem("remindMe",0);
+                            }
+                            window.location='/newsfeed';
+            },
+            function errorSignin(xhRequest, ErrorText, thrownError){
+                            alert('Wrong password or username. Please try again');
+                            console.log('error');
+
+            }
+        );
+    }
+    function signUpButton(){
+        var email = $('#email');
+        var username_reg = $('#username_reg');
+        var fullname_reg = $('#fullname_reg');
+        var password_reg = $('#password_reg');
+        signup(username_reg.val(),password_reg.val(),fullname_reg.val(),email.val(),
+            function successSignup(data, textStatus, jqXHR){
+                alert('Welcome on Dreamy Day');
+                localStorage.setItem("sessionID",data.message.id);
+                localStorage.setItem("username",username_reg.val());
+                localStorage.setItem("password",password_reg.val());
+                location.reload();
+            },
+            function errorSignup(xhRequest, ErrorText, thrownError){
+                alert('try an other username');
+            }
+        );
+    }
+    function remindMe(){
+        localStorage.setItem("remindMe",'yes');
+        console.log(localStorage.getItem("remindMe")+'avant');
+    }
+</script>
